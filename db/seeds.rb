@@ -1,7 +1,59 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
+
+categories = [
+    { name: "American (New)" },
+    { name: "American (Traditional)" },
+    { name: "Argentine" },
+    { name: "Asian Fusion" },
+    { name: "Barbeque" },
+    { name: "Bakeries" },
+    { name: "Bistros" },
+    { name: "Brazilian" },
+    { name: "Breakfast & Brunch" },
+    { name: "Burgers" },
+    { name: "Buffets" },
+    { name: "Cafeteria" },
+    { name: "Cafes" },
+    { name: "Cajun/Creole" },
+    { name: "Cambodian" },
+    { name: "Chilean" },
+    { name: "Comfort Food" },
+    { name: "Cuban" },
+    { name: "Diners" },
+    { name: "Eastern European" },
+    { name: "Caribbean" },
+    { name: "Chinese" },
+    { name: "Coffee & Tea" },
+    { name: "Delis" },
+    { name: "Falafel" },
+    { name: "Fast Food" },
+    { name: "French" },
+    { name: "Food Trucks" },
+    { name: "Halal" },
+    { name: "Italian" },
+    { name: "Japanese" },
+    { name: "Greek" },
+    { name: "Irish" },
+    { name: "Korean" },
+    { name: "Latin American" },
+    { name: "Mediterranean" },
+    { name: "Mexican" },
+    { name: "Modern European" },
+    { name: "Middle Eastern" },
+    { name: "Pizza" },
+    { name: "Salad" },
+    { name: "Sandwiches" },
+    { name: "Seafood" },
+    { name: "Spanish" },
+    { name: "Sushi Bars" },
+    { name: "Steakhouses" },
+    { name: "Tapas/Small Plates" },
+    { name: "Thai" },
+    { name: "Vegan" },
+    { name: "Vegetarian" },
+    { name: "Vietnamese" }
+]
+
+categories.each do |category|
+	Category.create!(category)
+end
