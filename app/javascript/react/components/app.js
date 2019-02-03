@@ -1,7 +1,14 @@
-import React from 'react'
+import React from "react";
+import CategoryContainer from "../../containers/CategoryContainer";
 
-export const App = (props) => {
-  return (<h1>Make It So React</h1>)
-}
+export const App = props => {
+  return (
+    <div>
+      <div>
+        <CategoryContainer />
+      </div>
+    </div>
+  );
+};
 
-export default App
+export default App;
