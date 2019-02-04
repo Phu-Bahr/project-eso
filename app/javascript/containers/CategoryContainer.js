@@ -6,8 +6,27 @@ class CategoryContainer extends Component {
     super(props);
     this.state = {
       categories: [],
-      choices: []
+      choices: [],
+      selectedId: null
     };
+    this.setSelectedStep = this.setSelectedStep.bind(this);
+    this.setSelectedChoice = this.setSelectedChoice.bind(this);
+  }
+
+  setSelectedStep(stepId) {
+    if (stepId === this.state.selectedId) {
+      this.setState({ selectedId: null });
+    } else {
+      this.setState({ selectedId: stepId });
+    }
+  }
+
+  setSelectedChoice(userChoice) {
+    if (userChoice === this.state.choices) {
+      this.setState({ choices: [] });
+    } else {
+      this.setState({ choices: userChoice });
+    }
   }
 
   componentDidMount() {
@@ -29,12 +48,33 @@ class CategoryContainer extends Component {
   }
 
   render() {
-    console.log(this.state.categories);
-
+    // console.log(this.state.selectedId);
+    // console.log(this.state.choices);
     let categoryArr = this.state.categories;
     let categoryList = categoryArr.map(category => {
-      return <CategoryTile key={category.id} name={category.name} />;
+      let handleClick = () => {
+        this.setSelectedStep(category.id);
+        this.setSelectedChoice(category.name);
+      };
+
+      let highlighted;
+      if (category.id === this.state.selectedId) {
+        highlighted = "green";
+      } else {
+        highlighted = "";
+      }
+
+      return (
+        <CategoryTile
+          key={category.id}
+          name={category.name}
+          id={category.id}
+          handleClick={handleClick}
+          highlighted={highlighted}
+        />
+      );
     });
+
     return (
       <div>
         <h1>HELLO FROM CONTAINER</h1>
