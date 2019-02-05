@@ -13,8 +13,7 @@ class CategoryContainer extends Component {
       city: "",
       state: "",
       zipCode: "",
-      price: 1,
-      dollarprice: ""
+      price: 1
     };
     this.setSelectedStep = this.setSelectedStep.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
