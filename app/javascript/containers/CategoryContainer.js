@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CategoryTile from "../tiles/CategoryTile";
+import PriceField from "../tiles/PriceField";
 
 class CategoryContainer extends Component {
   constructor(props) {
@@ -7,9 +8,12 @@ class CategoryContainer extends Component {
     this.state = {
       categories: [],
       choices: [],
-      selectedId: null
+      selectedId: null,
+      price: 1,
+      dollarprice: "$"
     };
     this.setSelectedStep = this.setSelectedStep.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
     this.setSelectedChoice = this.setSelectedChoice.bind(this);
   }
 
@@ -26,6 +30,20 @@ class CategoryContainer extends Component {
       this.setState({ choices: [] });
     } else {
       this.setState({ choices: userChoice });
+    }
+  }
+
+  handlePriceChange(event) {
+    let newPrice = event.target.value;
+    this.setState({ price: newPrice });
+    if (newPrice === 1) {
+      this.setState({ dollarprice: "$" });
+    } else if (newPrice === 2) {
+      this.setState({ dollarprice: "$$" });
+    } else if (newPrice === 3) {
+      this.setState({ dollarprice: "$$$" });
+    } else if (newPrice === 4) {
+      this.setState({ dollarprice: "$$$$" });
     }
   }
 
@@ -50,6 +68,8 @@ class CategoryContainer extends Component {
   render() {
     // console.log(this.state.selectedId);
     // console.log(this.state.choices);
+    console.log(this.state.price);
+    console.log(this.state.dollarprice);
     let categoryArr = this.state.categories;
     let categoryList = categoryArr.map(category => {
       let handleClick = () => {
@@ -77,7 +97,18 @@ class CategoryContainer extends Component {
 
     return (
       <div>
-        <h1>HELLO FROM CONTAINER</h1>
+        <h1>Welcome Back, you can do it!</h1>
+        <div>
+          <form className="panel">
+            <PriceField
+              label="Price"
+              name="price"
+              onChange={this.handlePriceChange}
+              value={this.state.price}
+              dollarvalue={this.state.dollarprice}
+            />
+          </form>
+        </div>
         <div>
           <CategoryTile />
         </div>
