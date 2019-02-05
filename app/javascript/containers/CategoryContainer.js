@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CategoryTile from "../tiles/CategoryTile";
+import LocationFormTile from "../tiles/LocationFormTile";
 
 class CategoryContainer extends Component {
   constructor(props) {
@@ -7,10 +8,15 @@ class CategoryContainer extends Component {
     this.state = {
       categories: [],
       choices: [],
-      selectedId: null
+      selectedId: null,
+      address: "",
+      city: "",
+      state: "",
+      zipCode: ""
     };
     this.setSelectedStep = this.setSelectedStep.bind(this);
     this.setSelectedChoice = this.setSelectedChoice.bind(this);
+    this.textChange = this.textChange.bind(this);
   }
 
   setSelectedStep(stepId) {
@@ -47,9 +53,14 @@ class CategoryContainer extends Component {
       });
   }
 
+  textChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   render() {
     // console.log(this.state.selectedId);
     // console.log(this.state.choices);
+    console.log(this.state);
     let categoryArr = this.state.categories;
     let categoryList = categoryArr.map(category => {
       let handleClick = () => {
@@ -77,9 +88,57 @@ class CategoryContainer extends Component {
 
     return (
       <div>
-        <h1>HELLO FROM CONTAINER</h1>
         <div>
-          <CategoryTile />
+          <form className="callout">
+            <h1>Location</h1>
+
+            <div>
+              <label htmlFor="address">Address:</label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={this.state.address}
+                onChange={event => this.textChange(event)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="city">City:</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={this.state.city}
+                onChange={event => this.textChange(event)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="state">State:</label>
+              <input
+                type="text"
+                id="state"
+                name="state"
+                value={this.state.state}
+                onChange={event => this.textChange(event)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="zipCode">Zip Code:</label>
+              <input
+                type="text"
+                id="zip-code"
+                name="zipCode"
+                value={this.state.zipCode}
+                onChange={event => this.textChange(event)}
+              />
+            </div>
+          </form>
+        </div>
+        <div>
+          <LocationFormTile />
         </div>
         <div>
           <div>{categoryList}</div>
