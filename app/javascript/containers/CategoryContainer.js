@@ -99,7 +99,7 @@ class CategoryContainer extends Component {
                 id="address"
                 name="address"
                 value={this.state.address}
-                onChange={e => this.textChange(e)}
+                onChange={event => this.textChange(event)}
               />
             </div>
 
@@ -110,7 +110,7 @@ class CategoryContainer extends Component {
                 id="city"
                 name="city"
                 value={this.state.city}
-                onChange={e => this.textChange(e)}
+                onChange={event => this.textChange(event)}
               />
             </div>
 
@@ -121,7 +121,7 @@ class CategoryContainer extends Component {
                 id="state"
                 name="state"
                 value={this.state.state}
-                onChange={e => this.textChange(e)}
+                onChange={event => this.textChange(event)}
               />
             </div>
 
@@ -132,7 +132,7 @@ class CategoryContainer extends Component {
                 id="zip-code"
                 name="zipCode"
                 value={this.state.zipCode}
-                onChange={e => this.textChange(e)}
+                onChange={event => this.textChange(event)}
               />
             </div>
           </form>
