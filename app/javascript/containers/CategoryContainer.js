@@ -10,7 +10,7 @@ class CategoryContainer extends Component {
       choices: [],
       selectedId: null,
       price: 1,
-      dollarprice: "$"
+      dollarprice: ""
     };
     this.setSelectedStep = this.setSelectedStep.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
@@ -108,9 +108,6 @@ class CategoryContainer extends Component {
               dollarvalue={this.state.dollarprice}
             />
           </form>
-        </div>
-        <div>
-          <CategoryTile />
         </div>
         <div>
           <div>{categoryList}</div>
