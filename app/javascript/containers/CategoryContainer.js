@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import CategoryTile from "../tiles/CategoryTile";
 import PriceField from "../tiles/PriceField";
-import LocationFormTile from "../tiles/LocationFormTile";
 
 class CategoryContainer extends Component {
   constructor(props) {
@@ -21,6 +20,7 @@ class CategoryContainer extends Component {
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.setSelectedChoice = this.setSelectedChoice.bind(this);
     this.textChange = this.textChange.bind(this);
+    // this.randomClick = this.randomClick.bind(this);
   }
 
   setSelectedStep(stepId) {
@@ -42,15 +42,6 @@ class CategoryContainer extends Component {
   handlePriceChange(event) {
     let newPrice = event.target.value;
     this.setState({ price: newPrice });
-    if (newPrice === 1) {
-      this.setState({ dollarprice: "$" });
-    } else if (newPrice === 2) {
-      this.setState({ dollarprice: "$$" });
-    } else if (newPrice === 3) {
-      this.setState({ dollarprice: "$$$" });
-    } else if (newPrice === 4) {
-      this.setState({ dollarprice: "$$$$" });
-    }
   }
 
   componentDidMount() {
@@ -75,12 +66,19 @@ class CategoryContainer extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  // randomClick() {
+  //   let myArray = this.state.categories;
+  //   let randomItem = myArray[Math.floor(Math.random() * myArray.length)];
+  //   this.setState({ categories: randomItem });
+  // }
+
   render() {
     // console.log(this.state.selectedId);
     // console.log(this.state.choices);
     console.log(this.state);
     console.log(this.state.price);
     console.log(this.state.dollarprice);
+
     let categoryArr = this.state.categories;
     let categoryList = categoryArr.map(category => {
       let handleClick = () => {
@@ -108,6 +106,9 @@ class CategoryContainer extends Component {
 
     return (
       <div>
+        <div>
+          <button onClick={this.randomClick}>Random</button>
+        </div>
         <div>
           <form className="panel">
             <PriceField
@@ -167,9 +168,6 @@ class CategoryContainer extends Component {
               />
             </div>
           </form>
-        </div>
-        <div>
-          <LocationFormTile />
         </div>
         <div>
           <div>{categoryList}</div>

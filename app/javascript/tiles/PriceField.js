@@ -4,7 +4,7 @@ const PriceField = props => {
   return (
     <div>
       <label>
-        {props.label} = {props.dollarvalue}
+        {props.label} = {props.value}$
         <br />
         <input
           type="range"
