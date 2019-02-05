@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CategoryTile from "../tiles/CategoryTile";
-import LocationFormTile from "../tiles/LocationFormTile";
+import PriceField from "../tiles/PriceField";
 
 class CategoryContainer extends Component {
   constructor(props) {
@@ -12,11 +12,14 @@ class CategoryContainer extends Component {
       address: "",
       city: "",
       state: "",
-      zipCode: ""
+      zipCode: "",
+      price: 1
     };
     this.setSelectedStep = this.setSelectedStep.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
     this.setSelectedChoice = this.setSelectedChoice.bind(this);
     this.textChange = this.textChange.bind(this);
+    // this.randomClick = this.randomClick.bind(this);
   }
 
   setSelectedStep(stepId) {
@@ -33,6 +36,11 @@ class CategoryContainer extends Component {
     } else {
       this.setState({ choices: userChoice });
     }
+  }
+
+  handlePriceChange(event) {
+    let newPrice = event.target.value;
+    this.setState({ price: newPrice });
   }
 
   componentDidMount() {
@@ -57,10 +65,19 @@ class CategoryContainer extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  // randomClick() {
+  //   let myArray = this.state.categories;
+  //   let randomItem = myArray[Math.floor(Math.random() * myArray.length)];
+  //   this.setState({ categories: randomItem });
+  // }
+
   render() {
     // console.log(this.state.selectedId);
     // console.log(this.state.choices);
     console.log(this.state);
+    console.log(this.state.price);
+    console.log(this.state.dollarprice);
+
     let categoryArr = this.state.categories;
     let categoryList = categoryArr.map(category => {
       let handleClick = () => {
@@ -88,6 +105,20 @@ class CategoryContainer extends Component {
 
     return (
       <div>
+        <div>
+          <button onClick={this.randomClick}>Random</button>
+        </div>
+        <div>
+          <form className="panel">
+            <PriceField
+              label="Price"
+              name="price"
+              onChange={this.handlePriceChange}
+              value={this.state.price}
+              dollarvalue={this.state.dollarprice}
+            />
+          </form>
+        </div>
         <div>
           <form className="callout">
             <h1>Location</h1>
@@ -136,9 +167,6 @@ class CategoryContainer extends Component {
               />
             </div>
           </form>
-        </div>
-        <div>
-          <LocationFormTile />
         </div>
         <div>
           <div>{categoryList}</div>
