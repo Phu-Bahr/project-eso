@@ -14,7 +14,6 @@ categories = [
     { name: "Buffets" },
     { name: "Cafeteria" },
     { name: "Cafes" },
-    { name: "Cajun/Creole" },
     { name: "Cambodian" },
     { name: "Chilean" },
     { name: "Comfort Food" },

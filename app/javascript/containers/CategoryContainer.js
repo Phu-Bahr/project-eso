@@ -7,12 +7,10 @@ class CategoryContainer extends Component {
     super(props);
     this.state = {
       categories: [],
+      yelpReturn: [],
       choices: [],
       selectedId: null,
-      address: "",
-      city: "",
-      state: "",
-      zipCode: "",
+      location: "",
       price: 1
     };
     this.setSelectedStep = this.setSelectedStep.bind(this);
@@ -72,11 +70,7 @@ class CategoryContainer extends Component {
   // }
 
   render() {
-    // console.log(this.state.selectedId);
-    // console.log(this.state.choices);
     console.log(this.state);
-    console.log(this.state.price);
-    console.log(this.state.dollarprice);
 
     let categoryArr = this.state.categories;
     let categoryList = categoryArr.map(category => {
@@ -124,45 +118,12 @@ class CategoryContainer extends Component {
             <h1>Location</h1>
 
             <div>
-              <label htmlFor="address">Address:</label>
+              <label htmlFor="location">City and State or Zip</label>
               <input
                 type="text"
-                id="address"
-                name="address"
-                value={this.state.address}
-                onChange={event => this.textChange(event)}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="city">City:</label>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={this.state.city}
-                onChange={event => this.textChange(event)}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="state">State:</label>
-              <input
-                type="text"
-                id="state"
-                name="state"
-                value={this.state.state}
-                onChange={event => this.textChange(event)}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="zipCode">Zip Code:</label>
-              <input
-                type="text"
-                id="zip-code"
-                name="zipCode"
-                value={this.state.zipCode}
+                id="location"
+                name="location"
+                value={this.state.location}
                 onChange={event => this.textChange(event)}
               />
             </div>
