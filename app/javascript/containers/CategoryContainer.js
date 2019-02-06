@@ -8,7 +8,7 @@ class CategoryContainer extends Component {
     this.state = {
       categories: [],
       yelpReturn: [],
-      choices: [],
+      choices: "",
       selectedId: null,
       location: "",
       price: 1
@@ -30,7 +30,19 @@ class CategoryContainer extends Component {
 
   setSelectedChoice(userChoice) {
     if (userChoice === this.state.choices) {
-      this.setState({ choices: [] });
+      this.setState({ choices: "" });
+    } else if (userChoice === "Comfort Food") {
+      userChoice = "comfortfood";
+      this.setState({ choices: userChoice });
+    } else if (userChoice === "Eastern European") {
+      userChoice = "eastern_european";
+      this.setState({ choices: userChoice });
+    } else if (userChoice === "Food Trucks") {
+      userChoice = "foodtrucks";
+      this.setState({ choices: userChoice });
+    } else if (userChoice === "Middle Easter") {
+      userChoice = "mideastern";
+      this.setState({ choices: userChoice });
     } else {
       this.setState({ choices: userChoice });
     }
@@ -55,7 +67,9 @@ class CategoryContainer extends Component {
       .then(response => response.json())
       .then(body => {
         let new_categories = body.categories;
-        this.setState({ categories: new_categories });
+        const shuffled = new_categories.sort(() => 0.5 - Math.random());
+        let selected = shuffled.slice(0, 20);
+        this.setState({ categories: selected });
       });
   }
 
@@ -64,8 +78,8 @@ class CategoryContainer extends Component {
   }
 
   // randomClick() {
-  //   let myArray = this.state.categories;
-  //   let randomItem = myArray[Math.floor(Math.random() * myArray.length)];
+  //   let myArr = this.state.categories;
+  //   let randomItem = myArr[Math.floor(Math.random() * myArr.length)];
   //   this.setState({ categories: randomItem });
   // }
 

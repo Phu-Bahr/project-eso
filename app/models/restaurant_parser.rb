@@ -2,13 +2,6 @@ require "json"
 require "http"
 require "optparse"
 
-# HTTParty or Faraday
-
-
-# request = HTTParty.createRequest
-# request.auth = "sdgfdggfg"
-# request.get()
-
 class RestaurantParser
   attr_reader :data
 
@@ -32,7 +25,6 @@ class RestaurantParser
       location: location,
       price: price,
       limit: SEARCH_LIMIT
-
     }
 
     response = HTTP.auth("Bearer #{ENV["API_KEY"]}").get(url, params: params)
