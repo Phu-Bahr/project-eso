@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   devise_for :users
     devise_scope :user do
       authenticated :user do
@@ -24,4 +25,5 @@ Rails.application.routes.draw do
       # end
     end
   end
+
 end
