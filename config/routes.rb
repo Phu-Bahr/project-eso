@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   devise_for :users
     devise_scope :user do
       authenticated :user do
@@ -16,4 +17,13 @@ Rails.application.routes.draw do
       resources :categories, only: [:index]
     end
   end
+
+  namespace :api do
+    namespace :v1 do
+      # resources :restaurants, only: [:index] do
+        get "/restaurants", to: "restaurants#search"
+      # end
+    end
+  end
+
 end
