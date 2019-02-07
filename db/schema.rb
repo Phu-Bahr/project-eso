@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_06_171917) do
+ActiveRecord::Schema.define(version: 2019_02_07_051431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,16 +21,37 @@ ActiveRecord::Schema.define(version: 2019_02_06_171917) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "categorizations", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_categorizations_on_category_id"
+    t.index ["restaurant_id"], name: "index_categorizations_on_restaurant_id"
+  end
+
+  create_table "choices", force: :cascade do |t|
+    t.bigint "restaurant_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_choices_on_restaurant_id"
+    t.index ["user_id"], name: "index_choices_on_user_id"
+  end
+
   create_table "restaurants", force: :cascade do |t|
+    t.string "alias"
+    t.string "coordinates"
+    t.string "price"
+    t.integer "rating"
     t.string "name", null: false
     t.string "street", null: false
     t.string "city", null: false
     t.string "state", null: false
     t.string "zip", null: false
     t.text "description"
-    t.text "image"
-    t.integer "avg_ratin"
-    t.string "avg_cost"
+    t.text "image_url"
+    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

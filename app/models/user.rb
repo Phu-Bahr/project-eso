@@ -9,4 +9,7 @@ class User < ApplicationRecord
   def username
     return self.email.split('@')[0]
   end
+
+  has_many :choices
+  has_many :restaurants, through: :choices
 end
