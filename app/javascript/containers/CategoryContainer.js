@@ -8,7 +8,7 @@ class CategoryContainer extends Component {
     this.state = {
       categories: [],
       yelpReturn: [],
-      choices: "",
+      category: "",
       selectedId: null,
       location: "",
       price: 1
@@ -17,6 +17,8 @@ class CategoryContainer extends Component {
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.setSelectedChoice = this.setSelectedChoice.bind(this);
     this.textChange = this.textChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.yelpCall = this.yelpCall.bind(this);
     // this.randomClick = this.randomClick.bind(this);
   }
 
@@ -29,22 +31,22 @@ class CategoryContainer extends Component {
   }
 
   setSelectedChoice(userChoice) {
-    if (userChoice === this.state.choices) {
-      this.setState({ choices: "" });
+    if (userChoice === this.state.category) {
+      this.setState({ category: "" });
     } else if (userChoice === "Comfort Food") {
       userChoice = "comfortfood";
-      this.setState({ choices: userChoice });
+      this.setState({ category: userChoice });
     } else if (userChoice === "Eastern European") {
       userChoice = "eastern_european";
-      this.setState({ choices: userChoice });
+      this.setState({ category: userChoice });
     } else if (userChoice === "Food Trucks") {
       userChoice = "foodtrucks";
-      this.setState({ choices: userChoice });
+      this.setState({ category: userChoice });
     } else if (userChoice === "Middle Easter") {
       userChoice = "mideastern";
-      this.setState({ choices: userChoice });
+      this.setState({ category: userChoice });
     } else {
-      this.setState({ choices: userChoice });
+      this.setState({ category: userChoice });
     }
   }
 
@@ -73,8 +75,42 @@ class CategoryContainer extends Component {
       });
   }
 
+  yelpCall(formPayload) {
+    fetch("/api/v1/restaurants", {
+      method: "GET",
+      body: JSON.stringify(formPayload)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        console.log(body);
+        let yelpJSON = body.businesses;
+        this.setState({ yelpReturn: yelpJSON });
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   textChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleFormSubmit(event) {
+    event.preventDefault();
+    let formPayload = {
+      category: this.state.category,
+      location: this.state.location,
+      price: this.state.price
+    };
+    console.log(formPayload);
+    this.yelpCall(formPayload);
   }
 
   // randomClick() {
@@ -114,7 +150,7 @@ class CategoryContainer extends Component {
     return (
       <div>
         <div>
-          <button onClick={this.randomClick}>Random</button>
+          <button onClick={this.handleFormSubmit}>Submit</button>
         </div>
         <div>
           <form className="panel">
