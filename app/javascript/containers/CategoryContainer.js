@@ -76,10 +76,11 @@ class CategoryContainer extends Component {
   }
 
   yelpCall(formPayload) {
-    fetch("/api/v1/restaurants", {
-      method: "GET",
-      body: JSON.stringify(formPayload)
-    })
+    // let url = "/api/v1/restaurants/search?"
+    // formPayload.forEach((key, value) => {
+    //   url += _________ (key=value)
+    // }
+    fetch("/api/v1/restaurants/search?test=banana")
       .then(response => {
         if (response.ok) {
           return response;
@@ -109,7 +110,6 @@ class CategoryContainer extends Component {
       location: this.state.location,
       price: this.state.price
     };
-    console.log(formPayload);
     this.yelpCall(formPayload);
   }
 
@@ -149,37 +149,40 @@ class CategoryContainer extends Component {
 
     return (
       <div>
-        <div>
-          <button onClick={this.handleFormSubmit}>Submit</button>
-        </div>
-        <div>
-          <form className="panel">
-            <PriceField
-              label="Price"
-              name="price"
-              onChange={this.handlePriceChange}
-              value={this.state.price}
-              dollarvalue={this.state.dollarprice}
-            />
-          </form>
-        </div>
-        <div>
-          <form className="callout">
-            <h1>Location</h1>
-
-            <div>
-              <label htmlFor="location">City and State or Zip</label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={this.state.location}
-                onChange={event => this.textChange(event)}
+        <h2>Hello, Please Click your Categories</h2>
+        <div className="row">
+          <div className="small-4 columns">
+            <form className="other-category">
+              <PriceField
+                label="Price"
+                name="price"
+                onChange={this.handlePriceChange}
+                value={this.state.price}
+                dollarvalue={this.state.dollarprice}
               />
-            </div>
-          </form>
+            </form>
+          </div>
+          <div className="small-4 columns other-category">
+            <form>
+              <h4>Location</h4>
+              <div>
+                <label htmlFor="location" />
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  placeholder="City and State or Zip"
+                  value={this.state.location}
+                  onChange={event => this.textChange(event)}
+                />
+              </div>
+            </form>
+          </div>
+          <div className="small-4 columns other-category">
+            <button onClick={this.handleFormSubmit}>Submit</button>
+          </div>
         </div>
-        <div>
+        <div className="row">
           <div>{categoryList}</div>
         </div>
       </div>
