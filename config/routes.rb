@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories
+  resources :restaurants
 
   namespace :api do
     namespace :v1 do

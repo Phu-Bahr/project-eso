@@ -50,6 +50,14 @@ input::placeholder {
   text-align: center;
 }
 
+.visible {
+  display: block;
+}
+
+.invisible {
+  display: hidden;
+}
+
 @import url("https://fonts.googleapis.com/css?family=Permanent+Marker");
 @import "foundation/functions";
 @import "foundation/components/grid";

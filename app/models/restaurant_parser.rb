@@ -17,15 +17,16 @@ class RestaurantParser
   DEFAULT_TERM = "italian"
   DEFAULT_LOCATION = "Boston, MA"
   DEFAULT_PRICE = 2
-  SEARCH_LIMIT = 10
+  SEARCH_LIMIT = 20
+
 
   def search(categories, location, price)
     url = "#{API_HOST}#{SEARCH_PATH}"
     params = {
-      categories: categories,
+      categories: categories.downcase,
       location: location,
       price: price,
-      limit: SEARCH_LIMIT
+      limit: 20,
       # categories: DEFAULT_TERM,
       # location: DEFAULT_LOCATION,
       # price: DEFAULT_PRICE,
