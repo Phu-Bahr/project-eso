@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import CategoryTile from "../tiles/CategoryTile";
 import PriceField from "../tiles/PriceField";
+import RestaurantContainer from "./RestaurantContainer";
+import { Link } from "react-router";
 
 class CategoryContainer extends Component {
   constructor(props) {
@@ -75,12 +77,8 @@ class CategoryContainer extends Component {
       });
   }
 
-  yelpCall(formPayload) {
-    // let url = "/api/v1/restaurants/search?"
-    // formPayload.forEach((key, value) => {
-    //   url += _________ (key=value)
-    // }
-    fetch("/api/v1/restaurants/search?test=banana")
+  yelpCall(url) {
+    fetch(url)
       .then(response => {
         if (response.ok) {
           return response;
@@ -92,8 +90,7 @@ class CategoryContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        console.log(body);
-        let yelpJSON = body.businesses;
+        let yelpJSON = body.data;
         this.setState({ yelpReturn: yelpJSON });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -105,13 +102,16 @@ class CategoryContainer extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    let formPayload = {
-      category: this.state.category,
-      location: this.state.location,
-      price: this.state.price
-    };
-    this.yelpCall(formPayload);
+    let url = `/api/v1/restaurants/search?location=${
+      this.state.location
+    }&categories=${this.state.category}&price=${this.state.price}`;
+    this.yelpCall(url);
   }
+
+  // let url = "/api/v1/restaurants/search?"
+  // formPayload.forEach((key, value) => {
+  //   url += _________ (key=value)
+  // }
 
   // randomClick() {
   //   let myArr = this.state.categories;
@@ -121,6 +121,12 @@ class CategoryContainer extends Component {
 
   render() {
     console.log(this.state);
+    let visibility = "visible";
+    if (this.state.yelpReturn.length > 0) {
+      visibility = "invisible";
+    } else {
+      visibility = "visible";
+    }
 
     let categoryArr = this.state.categories;
     let categoryList = categoryArr.map(category => {
@@ -149,41 +155,46 @@ class CategoryContainer extends Component {
 
     return (
       <div>
-        <h2>Hello, Please Click your Categories</h2>
-        <div className="row">
-          <div className="small-4 columns">
-            <form className="other-category">
-              <PriceField
-                label="Price"
-                name="price"
-                onChange={this.handlePriceChange}
-                value={this.state.price}
-                dollarvalue={this.state.dollarprice}
-              />
-            </form>
-          </div>
-          <div className="small-4 columns other-category">
-            <form>
-              <h4>Location</h4>
-              <div>
-                <label htmlFor="location" />
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                  placeholder="City and State or Zip"
-                  value={this.state.location}
-                  onChange={event => this.textChange(event)}
-                />
-              </div>
-            </form>
-          </div>
-          <div className="small-4 columns other-category">
-            <button onClick={this.handleFormSubmit}>Submit</button>
-          </div>
+        <div>
+          <RestaurantContainer yelpdata={this.state.yelpReturn} />
         </div>
-        <div className="row">
-          <div>{categoryList}</div>
+        <div className={visibility}>
+          <h2>Hello, Please Click your Categories</h2>
+          <div className="row">
+            <div className="small-4 columns">
+              <form className="other-category">
+                <PriceField
+                  label="Price"
+                  name="price"
+                  onChange={this.handlePriceChange}
+                  value={this.state.price}
+                  dollarvalue={this.state.dollarprice}
+                />
+              </form>
+            </div>
+            <div className="small-4 columns other-category">
+              <form>
+                <h4>Location</h4>
+                <div>
+                  <label htmlFor="location" />
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="City and State or Zip"
+                    value={this.state.location}
+                    onChange={event => this.textChange(event)}
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="small-4 columns other-category">
+              <button onClick={this.handleFormSubmit}>Submit</button>
+            </div>
+          </div>
+          <div className="row">
+            <div>{categoryList}</div>
+          </div>
         </div>
       </div>
     );

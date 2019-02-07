@@ -1,6 +1,6 @@
 import React from "react";
-import CategoryContainer from "../../containers/CategoryContainer";
 import { Route, IndexRoute, Router, browserHistory } from "react-router";
+import CategoryContainer from "../../containers/CategoryContainer";
 
 export const App = props => {
   return (
