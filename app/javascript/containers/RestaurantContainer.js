@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RestaurantTile from "../tiles/RestaurantTile";
+import { Link } from "react-router";
 
 class RestaurantContainer extends Component {
   constructor(props) {
@@ -34,6 +35,13 @@ class RestaurantContainer extends Component {
       <div className="row">
         <div className="restaurant-show-row">
           <div>{yelpList}</div>
+        </div>
+        <div>
+          <h1 className="row" align="center">
+            <Link to="/restaurants" className="text-center">
+              Your Restaurants
+            </Link>
+          </h1>
         </div>
       </div>
     );

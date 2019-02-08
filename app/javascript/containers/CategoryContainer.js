@@ -71,9 +71,7 @@ class CategoryContainer extends Component {
       .then(response => response.json())
       .then(body => {
         let new_categories = body.categories;
-        const shuffled = new_categories.sort(() => 0.5 - Math.random());
-        let selected = shuffled.slice(0, 20);
-        this.setState({ categories: selected });
+        this.setState({ categories: new_categories });
       });
   }
 
@@ -121,11 +119,14 @@ class CategoryContainer extends Component {
 
   render() {
     console.log(this.state);
-    let visibility = "visible";
+    let visibility;
+    let visibilityR;
     if (this.state.yelpReturn.length > 0) {
       visibility = "invisible";
+      visibilityR = "visible";
     } else {
       visibility = "visible";
+      visibilityR = "invisible";
     }
 
     let categoryArr = this.state.categories;
@@ -155,7 +156,7 @@ class CategoryContainer extends Component {
 
     return (
       <div>
-        <div>
+        <div className={visibilityR}>
           <RestaurantContainer yelpdata={this.state.yelpReturn} />
         </div>
         <div className={visibility}>

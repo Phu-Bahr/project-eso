@@ -40,13 +40,6 @@ const RestaurantTile = props => {
           </div>
         </div>
       </div>
-      <div>
-        <h1 className="row" align="center">
-          <Link to="/restaurants" className="text-center">
-            Your Restaurants
-          </Link>
-        </h1>
-      </div>
     </div>
   );
 };
