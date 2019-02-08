@@ -31,8 +31,10 @@ class RestaurantContainer extends Component {
       });
     }
     return (
-      <div>
-        <div>{yelpList}</div>
+      <div className="row">
+        <div className="restaurant-show-row">
+          <div>{yelpList}</div>
+        </div>
       </div>
     );
   }
