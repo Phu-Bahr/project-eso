@@ -71,9 +71,7 @@ class CategoryContainer extends Component {
       .then(response => response.json())
       .then(body => {
         let new_categories = body.categories;
-        const shuffled = new_categories.sort(() => 0.5 - Math.random());
-        let selected = shuffled.slice(0, 20);
-        this.setState({ categories: selected });
+        this.setState({ categories: new_categories });
       });
   }
 
