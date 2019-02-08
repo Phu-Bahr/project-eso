@@ -121,11 +121,14 @@ class CategoryContainer extends Component {
 
   render() {
     console.log(this.state);
-    let visibility = "visible";
+    let visibility;
+    let visibilityR;
     if (this.state.yelpReturn.length > 0) {
       visibility = "invisible";
+      visibilityR = "visible";
     } else {
       visibility = "visible";
+      visibilityR = "invisible";
     }
 
     let categoryArr = this.state.categories;
@@ -155,7 +158,7 @@ class CategoryContainer extends Component {
 
     return (
       <div>
-        <div>
+        <div className={visibilityR}>
           <RestaurantContainer yelpdata={this.state.yelpReturn} />
         </div>
         <div className={visibility}>
