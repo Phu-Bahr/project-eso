@@ -3,6 +3,7 @@
 First steps at creating eso.
 
 -Sign in
+
 -Put in Address or not
 -Click your food category
 -Click cost $-$\$\$\$
