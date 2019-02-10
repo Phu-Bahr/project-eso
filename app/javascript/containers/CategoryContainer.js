@@ -24,6 +24,7 @@ class CategoryContainer extends Component {
     this.handleYelpFetch = this.handleYelpFetch.bind(this);
     this.yelpCall = this.yelpCall.bind(this);
     this.addLiked = this.addLiked.bind(this);
+    this.addDisliked = this.addDisliked.bind(this);
   }
 
   setSelectedStep(stepId) {
@@ -43,7 +44,7 @@ class CategoryContainer extends Component {
     } else if (userChoice === "American (Traditional)") {
       userChoice = "tradamerican";
       this.setState({ category: userChoice });
-    } else if (userChoice === "Asian Fusion ") {
+    } else if (userChoice === "Asian Fusion") {
       userChoice = "asianfusion";
       this.setState({ category: userChoice });
     } else if (userChoice === "Breakfast & Brunch") {
@@ -52,19 +53,22 @@ class CategoryContainer extends Component {
     } else if (userChoice === "Indian") {
       userChoice = "indpak";
       this.setState({ category: userChoice });
+    } else if (userChoice === "Fast Food") {
+      userChoice = "hotdog";
+      this.setState({ category: userChoice });
     } else if (userChoice === "Middle Eastern") {
       userChoice = "mideastern";
       this.setState({ category: userChoice });
-    } else if (userChoice === "Modern European ") {
+    } else if (userChoice === "Modern European") {
       userChoice = "modern_european";
       this.setState({ category: userChoice });
-    } else if (userChoice === "Steakhouses ") {
+    } else if (userChoice === "Steakhouses") {
       userChoice = "steak";
       this.setState({ category: userChoice });
-    } else if (userChoice === "Sushi Bars ") {
+    } else if (userChoice === "Sushi Bars") {
       userChoice = "sushi";
       this.setState({ category: userChoice });
-    } else if (userChoice === "Tapas/Small Plates ") {
+    } else if (userChoice === "Tapas/Small Plates") {
       userChoice = "tapasmallplates";
       this.setState({ category: userChoice });
     } else {
@@ -131,8 +135,14 @@ class CategoryContainer extends Component {
     this.setState({ likes: currentLike.concat(likePayload) });
   }
 
+  addDisliked(dislikedPayload) {
+    let currentDislike = this.state.dislikes;
+    this.setState({ dislikes: currentDislike.concat(dislikedPayload) });
+  }
+
   render() {
-    console.log(this.state);
+    console.log(this.state.likes);
+    console.log(this.state.dislikes);
     let visibility;
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {
@@ -174,6 +184,7 @@ class CategoryContainer extends Component {
           <RestaurantContainer
             yelpdata={this.state.yelpReturn}
             addLiked={this.addLiked}
+            addDisliked={this.addDisliked}
           />
         </div>
         <div className={visibility}>
