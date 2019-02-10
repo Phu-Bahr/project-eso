@@ -21,7 +21,7 @@ class CategoryContainer extends Component {
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.setSelectedChoice = this.setSelectedChoice.bind(this);
     this.textChange = this.textChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleYelpFetch = this.handleYelpFetch.bind(this);
     this.yelpCall = this.yelpCall.bind(this);
     this.addLiked = this.addLiked.bind(this);
   }
@@ -100,7 +100,7 @@ class CategoryContainer extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleFormSubmit(event) {
+  handleYelpFetch(event) {
     event.preventDefault();
     let url = `/api/v1/restaurants/search?location=${
       this.state.location
@@ -189,7 +189,7 @@ class CategoryContainer extends Component {
               </form>
             </div>
             <div className="small-4 columns other-category">
-              <button onClick={this.handleFormSubmit}>Submit</button>
+              <button onClick={this.handleYelpFetch}>Submit</button>
             </div>
           </div>
           <div className="row">
