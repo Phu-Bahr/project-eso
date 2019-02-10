@@ -37,17 +37,35 @@ class CategoryContainer extends Component {
   setSelectedChoice(userChoice) {
     if (userChoice === this.state.category) {
       this.setState({ category: "" });
-    } else if (userChoice === "Comfort Food") {
-      userChoice = "comfortfood";
+    } else if (userChoice === "American (New)") {
+      userChoice = "newamerican";
       this.setState({ category: userChoice });
-    } else if (userChoice === "Eastern European") {
-      userChoice = "eastern_european";
+    } else if (userChoice === "American (Traditional)") {
+      userChoice = "tradamerican";
       this.setState({ category: userChoice });
-    } else if (userChoice === "Food Trucks") {
-      userChoice = "foodtrucks";
+    } else if (userChoice === "Asian Fusion ") {
+      userChoice = "asianfusion";
       this.setState({ category: userChoice });
-    } else if (userChoice === "Middle Easter") {
+    } else if (userChoice === "Breakfast & Brunch") {
+      userChoice = "breakfast_brunch";
+      this.setState({ category: userChoice });
+    } else if (userChoice === "Indian") {
+      userChoice = "indpak";
+      this.setState({ category: userChoice });
+    } else if (userChoice === "Middle Eastern") {
       userChoice = "mideastern";
+      this.setState({ category: userChoice });
+    } else if (userChoice === "Modern European ") {
+      userChoice = "modern_european";
+      this.setState({ category: userChoice });
+    } else if (userChoice === "Steakhouses ") {
+      userChoice = "steak";
+      this.setState({ category: userChoice });
+    } else if (userChoice === "Sushi Bars ") {
+      userChoice = "sushi";
+      this.setState({ category: userChoice });
+    } else if (userChoice === "Tapas/Small Plates ") {
+      userChoice = "tapasmallplates";
       this.setState({ category: userChoice });
     } else {
       this.setState({ category: userChoice });
