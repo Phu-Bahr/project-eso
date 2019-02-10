@@ -32,6 +32,7 @@ class RestaurantParser
       # price: DEFAULT_PRICE,
       # limit: SEARCH_LIMIT
     }
+
     response = HTTP.auth("Bearer #{ENV["API_KEY"]}").get(url, params: params)
     restaurant_data = response.parse["businesses"].each do |item|
 

@@ -47,7 +47,7 @@ class RestaurantContainer extends Component {
             coordinates={restaurant.coordinates}
             name={restaurant.name}
             like={handleLikeClick}
-            confirm={addLikedRestaurant}
+            confirm={this.addLikedRestaurant}
           />
         );
       });
