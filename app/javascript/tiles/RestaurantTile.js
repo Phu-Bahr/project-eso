@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const RestaurantTile = props => {
   return (
-    <div>
+    <div className={props.show}>
       <div className="rest-info">
         <div className="row rest-info-tile">
           <div className="small-6 columns">

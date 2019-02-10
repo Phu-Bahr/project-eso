@@ -8,12 +8,13 @@ class RestaurantContainer extends Component {
     this.state = {
       liked: [],
       dislike: [],
-      confirmed: []
+      selectedId: null
     };
 
     this.addLikedRestaurant = this.addLikedRestaurant.bind(this);
     this.setCurrentRestaurant = this.setCurrentRestaurant.bind(this);
     this.addDislikedRestaurant = this.addDislikedRestaurant.bind(this);
+    this.selectId = this.selectId.bind(this);
   }
 
   setCurrentRestaurant(setID) {
@@ -36,8 +37,12 @@ class RestaurantContainer extends Component {
     this.props.addDisliked(dislikedPayload);
   }
 
+  selectId(stepId) {
+    this.setState({ selectedId: stepId });
+  }
+
   render() {
-    console.log("Restaurants Container state =>", this.state);
+    console.log(this.state);
 
     let yelpList = [];
     if (this.props.yelpdata) {
@@ -45,9 +50,11 @@ class RestaurantContainer extends Component {
       yelpList = yelpData.map(restaurant => {
         let handleLikeClick = () => {
           this.setCurrentRestaurant(restaurant);
+          this.selectId(restaurant.id);
         };
         let handleDislikeClick = () => {
           this.setCurrentDislikedRestaurant(restaurant);
+          this.selectId(restaurant.id);
         };
 
         let yelpCat = [];
@@ -55,9 +62,16 @@ class RestaurantContainer extends Component {
           categories => `*${categories.title}*`
         );
 
+        let visibility = "";
+        if (restaurant == this.state.dislike) {
+          visibility = "invisible";
+        } else {
+          visibility = "visible";
+        }
         return (
           <RestaurantTile
             key={restaurant.id}
+            show={visibility}
             alias={restaurant.alias}
             categories={yelpCat}
             price={restaurant.price}

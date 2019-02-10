@@ -3,6 +3,7 @@ import CategoryTile from "../tiles/CategoryTile";
 import PriceField from "../tiles/PriceField";
 import RestaurantContainer from "./RestaurantContainer";
 import { Link } from "react-router";
+import LikedContainer from "./LikedContainer";
 
 class CategoryContainer extends Component {
   constructor(props) {
@@ -180,6 +181,9 @@ class CategoryContainer extends Component {
 
     return (
       <div>
+        <div>
+          <LikedContainer likeArray={this.state.likes} />
+        </div>
         <div className={visibilityR}>
           <RestaurantContainer
             yelpdata={this.state.yelpReturn}
