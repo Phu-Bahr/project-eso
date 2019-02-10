@@ -35,7 +35,8 @@ const RestaurantTile = props => {
             </div>
           </div>
           <div className="medium-6 columns">
-            <button>LIKE</button>
+            <button onClick={props.like}>LIKE</button>
+            <button onClick={props.confirm}>Confirm</button>
             <button>DISLIKE</button>
           </div>
         </div>

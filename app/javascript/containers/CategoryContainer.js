@@ -13,7 +13,9 @@ class CategoryContainer extends Component {
       category: "",
       selectedId: null,
       location: "",
-      price: 1
+      price: 1,
+      likes: [],
+      dislikes: []
     };
     this.setSelectedStep = this.setSelectedStep.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
@@ -21,7 +23,7 @@ class CategoryContainer extends Component {
     this.textChange = this.textChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.yelpCall = this.yelpCall.bind(this);
-    // this.randomClick = this.randomClick.bind(this);
+    this.addLiked = this.addLiked.bind(this);
   }
 
   setSelectedStep(stepId) {
@@ -106,16 +108,10 @@ class CategoryContainer extends Component {
     this.yelpCall(url);
   }
 
-  // let url = "/api/v1/restaurants/search?"
-  // formPayload.forEach((key, value) => {
-  //   url += _________ (key=value)
-  // }
-
-  // randomClick() {
-  //   let myArr = this.state.categories;
-  //   let randomItem = myArr[Math.floor(Math.random() * myArr.length)];
-  //   this.setState({ categories: randomItem });
-  // }
+  addLiked(likePayload) {
+    let currentLike = this.state.likes;
+    this.setState({ likes: currentLike.concat(likePayload) });
+  }
 
   render() {
     console.log(this.state);
@@ -157,7 +153,10 @@ class CategoryContainer extends Component {
     return (
       <div>
         <div className={visibilityR}>
-          <RestaurantContainer yelpdata={this.state.yelpReturn} />
+          <RestaurantContainer
+            yelpdata={this.state.yelpReturn}
+            addLiked={this.addLiked}
+          />
         </div>
         <div className={visibility}>
           <h2>Hello, Please Click your Categories</h2>
