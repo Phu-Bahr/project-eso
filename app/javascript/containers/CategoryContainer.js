@@ -160,6 +160,16 @@ class CategoryContainer extends Component {
       visibilityR = "invisible";
     }
 
+    let visibilityL;
+    if (
+      this.state.likes.length + this.state.dislikes.length ===
+      this.state.yelpReturn.length
+    ) {
+      visibilityL = "";
+    } else {
+      visibilityL = "invisible";
+    }
+
     let categoryArr = this.state.categories;
     let categoryList = categoryArr.map(category => {
       let handleClick = () => {
@@ -187,7 +197,7 @@ class CategoryContainer extends Component {
 
     return (
       <div>
-        <div>
+        <div className={visibilityL}>
           <LikedContainer likeArray={this.state.likes} />
         </div>
         <div className={visibilityR}>
