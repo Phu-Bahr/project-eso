@@ -35,7 +35,6 @@ class LikedContainer extends Component {
     }
     return (
       <div>
-        <h1>HELLO FORM LIKED CONTAINER</h1>
         <div>{likedList}</div>
       </div>
     );
