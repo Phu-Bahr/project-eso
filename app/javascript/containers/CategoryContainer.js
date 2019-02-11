@@ -148,9 +148,8 @@ class CategoryContainer extends Component {
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {
       visibility = "invisible";
-      visibilityR = "visible";
+      visibilityR = "";
     } else {
-      visibility = "visible";
       visibilityR = "invisible";
     }
 

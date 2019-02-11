@@ -66,7 +66,7 @@ class RestaurantContainer extends Component {
         if (restaurant == this.state.dislike) {
           visibility = "invisible";
         } else {
-          visibility = "visible";
+          visibility = "";
         }
         return (
           <RestaurantTile
