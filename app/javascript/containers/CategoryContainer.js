@@ -48,6 +48,9 @@ class CategoryContainer extends Component {
     } else if (userChoice === "Asian Fusion") {
       userChoice = "asianfusion";
       this.setState({ category: userChoice });
+    } else if (userChoice === "Barbeque") {
+      userChoice = "bbq";
+      this.setState({ category: userChoice });
     } else if (userChoice === "Breakfast & Brunch") {
       userChoice = "breakfast_brunch";
       this.setState({ category: userChoice });
@@ -133,24 +136,27 @@ class CategoryContainer extends Component {
 
   addLiked(likePayload) {
     let currentLike = this.state.likes;
-    this.setState({ likes: currentLike.concat(likePayload) });
+    if (!this.state.likes.includes(likePayload)) {
+      this.setState({ likes: currentLike.concat(likePayload) });
+    }
   }
 
   addDisliked(dislikedPayload) {
     let currentDislike = this.state.dislikes;
-    this.setState({ dislikes: currentDislike.concat(dislikedPayload) });
+    if (!this.state.dislikes.includes(dislikedPayload)) {
+      this.setState({ dislikes: currentDislike.concat(dislikedPayload) });
+    }
   }
 
   render() {
-    console.log(this.state.likes);
-    console.log(this.state.dislikes);
+    console.log("liked state => ", this.state.likes);
+    console.log("disliked state => ", this.state.dislikes);
     let visibility;
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {
       visibility = "invisible";
-      visibilityR = "visible";
+      visibilityR = "";
     } else {
-      visibility = "visible";
       visibilityR = "invisible";
     }
 

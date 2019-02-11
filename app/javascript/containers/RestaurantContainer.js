@@ -8,12 +8,13 @@ class RestaurantContainer extends Component {
     this.state = {
       liked: [],
       dislike: [],
-      selectedId: null
+      selectedId: null,
+      confirmed: []
     };
 
-    this.addLikedRestaurant = this.addLikedRestaurant.bind(this);
+    this.confirmLikedRestaurant = this.confirmLikedRestaurant.bind(this);
     this.setCurrentRestaurant = this.setCurrentRestaurant.bind(this);
-    this.addDislikedRestaurant = this.addDislikedRestaurant.bind(this);
+    this.confirmDislikedRestaurant = this.confirmDislikedRestaurant.bind(this);
     this.selectId = this.selectId.bind(this);
   }
 
@@ -25,16 +26,22 @@ class RestaurantContainer extends Component {
     this.setState({ dislike: setID });
   }
 
-  addLikedRestaurant(event) {
+  confirmLikedRestaurant(event) {
     event.preventDefault();
     let likePayload = this.state.liked;
     this.props.addLiked(likePayload);
+    let currentConfirmed = this.state.confirmed;
+    this.setState({ confirmed: currentConfirmed.concat(likePayload) });
+    this.setState({ liked: [] });
   }
 
-  addDislikedRestaurant(event) {
+  confirmDislikedRestaurant(event) {
     event.preventDefault();
     let dislikedPayload = this.state.dislike;
     this.props.addDisliked(dislikedPayload);
+    let currentConfirmed = this.state.confirmed;
+    this.setState({ confirmed: currentConfirmed.concat(dislikedPayload) });
+    this.setState({ dislike: [] });
   }
 
   selectId(stepId) {
@@ -42,7 +49,7 @@ class RestaurantContainer extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log("restaurant container => ", this.state);
 
     let yelpList = [];
     if (this.props.yelpdata) {
@@ -63,11 +70,12 @@ class RestaurantContainer extends Component {
         );
 
         let visibility = "";
-        if (restaurant == this.state.dislike) {
+        if (this.state.confirmed.includes(restaurant)) {
           visibility = "invisible";
         } else {
-          visibility = "visible";
+          visibility = "";
         }
+
         return (
           <RestaurantTile
             key={restaurant.id}
@@ -83,8 +91,8 @@ class RestaurantContainer extends Component {
             name={restaurant.name}
             like={handleLikeClick}
             dislike={handleDislikeClick}
-            confirm={this.addLikedRestaurant}
-            confirmDislike={this.addDislikedRestaurant}
+            confirm={this.confirmLikedRestaurant}
+            confirmDislike={this.confirmDislikedRestaurant}
           />
         );
       });
