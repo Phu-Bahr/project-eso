@@ -122,16 +122,16 @@ class CategoryContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  textChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
   handleYelpFetch(event) {
     event.preventDefault();
     let url = `/api/v1/restaurants/search?location=${
       this.state.location
     }&categories=${this.state.category}&price=${this.state.price}`;
     this.yelpCall(url);
+  }
+
+  textChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   addLiked(likePayload) {
