@@ -7,8 +7,17 @@ export const App = props => {
   return (
     <div>
       <Router history={browserHistory}>
-        <Route path="/" component={CategoryContainer} />
-        <Route path="/restaurants" component={UserContainer} />
+        <Route
+          path="/"
+          onChange={(prevState, nextState) => {
+            if (nextState.location.action !== "POP") {
+              window.scrollTo(0, 0);
+            }
+          }}
+        >
+          <IndexRoute component={CategoryContainer} />
+          <Route path="/restaurants" component={UserContainer} />
+        </Route>
       </Router>
     </div>
   );
