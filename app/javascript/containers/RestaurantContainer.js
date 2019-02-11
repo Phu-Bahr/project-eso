@@ -8,22 +8,23 @@ class RestaurantContainer extends Component {
     this.state = {
       liked: [],
       dislike: [],
-      selectedId: null,
       confirmed: []
     };
 
     this.confirmLikedRestaurant = this.confirmLikedRestaurant.bind(this);
     this.setCurrentRestaurant = this.setCurrentRestaurant.bind(this);
     this.confirmDislikedRestaurant = this.confirmDislikedRestaurant.bind(this);
-    this.selectId = this.selectId.bind(this);
+    this.setCurrentDislikedRestaurant = this.setCurrentDislikedRestaurant.bind(
+      this
+    );
   }
 
-  setCurrentRestaurant(setID) {
-    this.setState({ liked: setID });
+  setCurrentRestaurant(setRestaurant) {
+    this.setState({ liked: setRestaurant });
   }
 
-  setCurrentDislikedRestaurant(setID) {
-    this.setState({ dislike: setID });
+  setCurrentDislikedRestaurant(setRestaurant) {
+    this.setState({ dislike: setRestaurant });
   }
 
   confirmLikedRestaurant(event) {
@@ -44,10 +45,6 @@ class RestaurantContainer extends Component {
     this.setState({ dislike: [] });
   }
 
-  selectId(stepId) {
-    this.setState({ selectedId: stepId });
-  }
-
   render() {
     console.log("restaurant container => ", this.state);
 
@@ -57,11 +54,9 @@ class RestaurantContainer extends Component {
       yelpList = yelpData.map(restaurant => {
         let handleLikeClick = () => {
           this.setCurrentRestaurant(restaurant);
-          this.selectId(restaurant.id);
         };
         let handleDislikeClick = () => {
           this.setCurrentDislikedRestaurant(restaurant);
-          this.selectId(restaurant.id);
         };
 
         let yelpCat = [];
@@ -103,6 +98,7 @@ class RestaurantContainer extends Component {
           <div className="restaurant-show-row">
             <div>{yelpList}</div>
           </div>
+          <div />
         </div>
         <div className="row">
           <h1>
