@@ -5,21 +5,47 @@ class LikedContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      like: [],
+      like: {},
       dislike: []
     };
     this.setFinalRestaurant = this.setFinalRestaurant.bind(this);
     this.setIgnoreRestaurant = this.setIgnoreRestaurant.bind(this);
+    this.postRestaurant = this.postRestaurant.bind(this);
   }
 
   setFinalRestaurant(setRestaurant) {
-    let currentLike = this.state.like;
-    this.setState({ like: currentLike.concat(setRestaurant) });
+    this.setState({ like: setRestaurant });
+    this.postRestaurant(setRestaurant);
   }
 
   setIgnoreRestaurant(ignore) {
     let currentDislike = this.state.dislike;
     this.setState({ dislike: currentDislike.concat(ignore) });
+  }
+
+  postRestaurant(restaurant) {
+    fetch("/api/v1/restaurants/", {
+      method: "POST",
+      body: JSON.stringify(restaurant),
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        console.log("postFetch Successful");
+      });
   }
 
   render() {

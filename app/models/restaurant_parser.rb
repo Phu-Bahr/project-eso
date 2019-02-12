@@ -46,7 +46,8 @@ class RestaurantParser
         location: item["location"],
         rating: item["rating"],
         url: item["url"],
-        image_url: item["image_url"]
+        image_url: item["image_url"],
+        review_count: item["review_count"]
       }
       @data << new_hash
     end
