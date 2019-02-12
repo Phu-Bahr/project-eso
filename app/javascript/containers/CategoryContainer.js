@@ -122,16 +122,16 @@ class CategoryContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  textChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
   handleYelpFetch(event) {
     event.preventDefault();
     let url = `/api/v1/restaurants/search?location=${
       this.state.location
     }&categories=${this.state.category}&price=${this.state.price}`;
     this.yelpCall(url);
+  }
+
+  textChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   addLiked(likePayload) {
@@ -149,8 +149,8 @@ class CategoryContainer extends Component {
   }
 
   render() {
-    console.log("liked state => ", this.state.likes);
-    console.log("disliked state => ", this.state.dislikes);
+    console.log("Category liked state => ", this.state.likes);
+    console.log("Category disliked state => ", this.state.dislikes);
     let visibility;
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {
@@ -195,6 +195,8 @@ class CategoryContainer extends Component {
       );
     });
 
+    let confirmed = this.state.likes.concat(this.state.dislikes);
+
     return (
       <div>
         <div className={visibilityL}>
@@ -202,6 +204,7 @@ class CategoryContainer extends Component {
         </div>
         <div className={visibilityR}>
           <RestaurantContainer
+            confirmed={confirmed}
             yelpdata={this.state.yelpReturn}
             addLiked={this.addLiked}
             addDisliked={this.addDisliked}

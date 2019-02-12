@@ -15,14 +15,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get "/restaurants/search", to: "restaurants#search"
+      resources :restaurants, only: [:create]
       resources :categories, only: [:index]
     end
   end
 
-  namespace :api do
-    namespace :v1 do
-      get "/restaurants/search", to: "restaurants#search"
-    end
-  end
+
 
 end

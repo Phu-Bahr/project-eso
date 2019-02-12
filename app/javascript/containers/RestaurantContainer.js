@@ -5,44 +5,20 @@ import { Link } from "react-router";
 class RestaurantContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      liked: [],
-      dislike: [],
-      confirmed: []
-    };
+    this.state = {};
 
-    this.confirmLikedRestaurant = this.confirmLikedRestaurant.bind(this);
     this.setCurrentRestaurant = this.setCurrentRestaurant.bind(this);
-    this.confirmDislikedRestaurant = this.confirmDislikedRestaurant.bind(this);
     this.setCurrentDislikedRestaurant = this.setCurrentDislikedRestaurant.bind(
       this
     );
   }
 
   setCurrentRestaurant(setRestaurant) {
-    this.setState({ liked: setRestaurant });
+    this.props.addLiked([setRestaurant]);
   }
 
   setCurrentDislikedRestaurant(setRestaurant) {
-    this.setState({ dislike: setRestaurant });
-  }
-
-  confirmLikedRestaurant(event) {
-    event.preventDefault();
-    let likePayload = this.state.liked;
-    this.props.addLiked(likePayload);
-    let currentConfirmed = this.state.confirmed;
-    this.setState({ confirmed: currentConfirmed.concat(likePayload) });
-    this.setState({ liked: [] });
-  }
-
-  confirmDislikedRestaurant(event) {
-    event.preventDefault();
-    let dislikedPayload = this.state.dislike;
-    this.props.addDisliked(dislikedPayload);
-    let currentConfirmed = this.state.confirmed;
-    this.setState({ confirmed: currentConfirmed.concat(dislikedPayload) });
-    this.setState({ dislike: [] });
+    this.props.addDisliked([setRestaurant]);
   }
 
   render() {
@@ -55,6 +31,7 @@ class RestaurantContainer extends Component {
         let handleLikeClick = () => {
           this.setCurrentRestaurant(restaurant);
         };
+
         let handleDislikeClick = () => {
           this.setCurrentDislikedRestaurant(restaurant);
         };
@@ -65,7 +42,7 @@ class RestaurantContainer extends Component {
         );
 
         let visibility = "";
-        if (this.state.confirmed.includes(restaurant)) {
+        if (this.props.confirmed.includes(restaurant)) {
           visibility = "invisible";
         } else {
           visibility = "";
@@ -86,8 +63,6 @@ class RestaurantContainer extends Component {
             name={restaurant.name}
             like={handleLikeClick}
             dislike={handleDislikeClick}
-            confirm={this.confirmLikedRestaurant}
-            confirmDislike={this.confirmDislikedRestaurant}
           />
         );
       });
