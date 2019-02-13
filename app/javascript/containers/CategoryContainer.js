@@ -117,6 +117,9 @@ class CategoryContainer extends Component {
       .then(response => response.json())
       .then(body => {
         let yelpJSON = body.data;
+        if (yelpJSON === []) {
+          alert("Sorry no results for this search");
+        }
         this.setState({ yelpReturn: yelpJSON });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -149,6 +152,7 @@ class CategoryContainer extends Component {
   }
 
   render() {
+    console.log(this.state);
     let visibility;
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {
@@ -196,7 +200,7 @@ class CategoryContainer extends Component {
     let confirmed = this.state.likes.concat(this.state.dislikes);
 
     return (
-      <div>
+      <div className="background">
         <div className={visibilityL}>
           <LikedContainer likeArray={this.state.likes} />
         </div>

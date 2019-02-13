@@ -37,12 +37,17 @@ class RestaurantParser
     response = HTTP.auth("Bearer #{ENV["API_KEY"]}").get(url, params: params)
     restaurant_data = response.parse["businesses"].each do |item|
 
+    categories_array = []
+    item["categories"].each do |category|
+      categories_array << category["title"]
+    end
+
       new_hash = {
         id: item["id"],
         alias: item["alias"],
         coordinates: item["coordinates"],
         name: item["name"],
-        categories: item["categories"],
+        categories: categories_array,
         price: item["price"],
         location: item["location"],
         rating: item["rating"],

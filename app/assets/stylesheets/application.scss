@@ -16,8 +16,21 @@
 
  */
 
-.layer {
-}
+@import url("https://fonts.googleapis.com/css?family=Permanent+Marker");
+
+// .background {
+//   background-color: red;
+// }
+
+// .background {
+//   height: 100%;
+//   display: flex;
+//   min-width: 100%;
+//   background: url("https://media.cntraveler.com/photos/5859aad8eaa56c5e65d43539/master/pass/best-restaurants-NYC-Charlie-Bird-interior-2016.jpg");
+//   background-position: left;
+//   background-size: cover;
+//   background-attachment: fixed;
+// }
 
 .green {
   color: green;
@@ -67,8 +80,6 @@ input::placeholder {
   height: 0.00001px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Permanent+Marker");
-
 .title {
   font-family: "Permanent Marker", cursive;
 }
@@ -80,16 +91,6 @@ a {
 button {
   margin: 5px;
   background-color: #efbc04;
-}
-
-#hero {
-  height: 100vh;
-  display: flex;
-  min-width: 100%;
-  background: image-url("hero-image-slogan-web.jpg");
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
 }
 
 .restaurant {
@@ -238,7 +239,4 @@ button {
 }
 .review-container {
   padding: 2rem;
-}
-
-.test {
 }
