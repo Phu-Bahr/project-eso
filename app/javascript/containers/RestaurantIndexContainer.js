@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import ChoiceTile from "../tiles/ChoiceTile";
+import RestaurantIndexTile from "../tiles/RestaurantIndexTile";
 
 class RestaurantIndexContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user_rest: [],
-      name: []
+      name: ""
     };
   }
 
@@ -23,7 +23,6 @@ class RestaurantIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        console.log(body);
         this.setState({
           user_rest: body.restaurants[0].UserRestaurants,
           name: body.restaurants[0].UserName
@@ -33,14 +32,21 @@ class RestaurantIndexContainer extends Component {
 
   render() {
     console.log(this.state.user_rest);
+    let userName = this.state.name.substr(0, this.state.name.indexOf("@"));
 
-    let user = this.state.user_rest.map(user => {
-      return <ChoiceTile key={user.id} name={user.alias} />;
+    let userRestaurants = this.state.user_rest.map(restaurant => {
+      return (
+        <RestaurantIndexTile
+          key={restaurant.id}
+          name={restaurant.name}
+          url={restaurant.url}
+        />
+      );
     });
     return (
       <div className="row">
-        <h1>Tony's Restaurants</h1>
-        <div>{user}</div>
+        <h1>{userName}'s Restaurants</h1>
+        <ul>{userRestaurants}</ul>
       </div>
     );
   }
