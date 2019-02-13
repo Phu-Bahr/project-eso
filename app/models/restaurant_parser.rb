@@ -26,7 +26,7 @@ class RestaurantParser
       categories: categories.downcase,
       location: location,
       price: price,
-      limit: 20,
+      limit: 15,
       radius: 5000
       # categories: DEFAULT_TERM,
       # location: DEFAULT_LOCATION,

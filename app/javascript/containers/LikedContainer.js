@@ -52,7 +52,6 @@ class LikedContainer extends Component {
   }
 
   render() {
-    console.log("Liked Container => ", this.state);
     let likedList = [];
     if (this.props.likeArray) {
       let likedData = this.props.likeArray;
