@@ -27,6 +27,7 @@ class RestaurantParser
       location: location,
       price: price,
       limit: 20,
+      radius: 5000
       # categories: DEFAULT_TERM,
       # location: DEFAULT_LOCATION,
       # price: DEFAULT_PRICE,

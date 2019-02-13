@@ -63,6 +63,7 @@ class RestaurantContainer extends Component {
             name={restaurant.name}
             like={handleLikeClick}
             dislike={handleDislikeClick}
+            reviewCount={restaurant.review_count}
           />
         );
       });
@@ -73,14 +74,6 @@ class RestaurantContainer extends Component {
           <div className="restaurant-show-row">
             <div>{yelpList}</div>
           </div>
-          <div />
-        </div>
-        <div className="row">
-          <h1>
-            <Link to="/restaurants" className="text-center">
-              Your Restaurants
-            </Link>
-          </h1>
         </div>
       </div>
     );
