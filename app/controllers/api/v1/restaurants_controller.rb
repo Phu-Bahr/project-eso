@@ -2,6 +2,10 @@ class Api::V1::RestaurantsController < ApplicationController
 
   protect_from_forgery unless: -> { request.format.json? }
 
+  def index
+    render json: Restaurant.all
+  end
+
   def search
     restaurant_parser = RestaurantParser.new
     categories = params[:categories]

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, IndexRoute, Router, browserHistory } from "react-router";
 import CategoryContainer from "../../containers/CategoryContainer";
-import UserContainer from "../../containers/UserContainer";
+import RestaurantIndexContainer from "../../containers/RestaurantIndexContainer";
 
 export const App = props => {
   return (
@@ -16,7 +16,7 @@ export const App = props => {
           }}
         >
           <IndexRoute component={CategoryContainer} />
-          <Route path="/restaurants" component={UserContainer} />
+          <Route path="/restaurants" component={RestaurantIndexContainer} />
         </Route>
       </Router>
     </div>

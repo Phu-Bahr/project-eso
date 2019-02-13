@@ -149,8 +149,6 @@ class CategoryContainer extends Component {
   }
 
   render() {
-    console.log("Category liked state => ", this.state.likes);
-    console.log("Category disliked state => ", this.state.dislikes);
     let visibility;
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {

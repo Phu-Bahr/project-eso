@@ -22,8 +22,6 @@ class RestaurantContainer extends Component {
   }
 
   render() {
-    console.log("restaurant container => ", this.state);
-
     let yelpList = [];
     if (this.props.yelpdata) {
       let yelpData = this.props.yelpdata;
