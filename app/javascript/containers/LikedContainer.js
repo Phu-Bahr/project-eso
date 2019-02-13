@@ -47,7 +47,7 @@ class LikedContainer extends Component {
       .then(response => response.json())
       .then(body => {
         this.setState({ final: true });
-        this;
+        return (location.href = "/restaurants");
       });
   }
 
