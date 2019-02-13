@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import LikedTile from "../tiles/LikedTile";
+import { Link } from "react-router";
 
 class LikedContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       like: {},
-      dislike: []
+      dislike: [],
+      final: false
     };
     this.setFinalRestaurant = this.setFinalRestaurant.bind(this);
     this.setIgnoreRestaurant = this.setIgnoreRestaurant.bind(this);
@@ -44,7 +46,8 @@ class LikedContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        console.log("postFetch Successful");
+        this.setState({ final: true });
+        this;
       });
   }
 
@@ -70,7 +73,7 @@ class LikedContainer extends Component {
         }
 
         let visibilityFinal;
-        if (this.state.like.length > 0) {
+        if (this.state.final === true) {
           visibilityFinal = "invisible";
         }
 

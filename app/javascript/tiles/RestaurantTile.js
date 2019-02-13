@@ -28,7 +28,8 @@ const RestaurantTile = props => {
                   </h6>
                   <div className="categories text-center">
                     <p>
-                      Rating: {props.rating} ☆ | Price: {props.price}
+                      Rating: {props.rating} ☆ | Reviewed: {props.reviewCount} |
+                      Price: {props.price}
                     </p>
                     <p>{props.categories}</p>
                   </div>
