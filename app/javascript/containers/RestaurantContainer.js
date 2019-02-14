@@ -29,15 +29,12 @@ class RestaurantContainer extends Component {
         let handleLikeClick = () => {
           this.setCurrentRestaurant(restaurant);
         };
-
         let handleDislikeClick = () => {
           this.setCurrentDislikedRestaurant(restaurant);
         };
 
         let yelpCat = [];
-        yelpCat = restaurant.categories.map(
-          categories => `*${categories.title}*`
-        );
+        yelpCat = restaurant.categories.map(categories => `| ${categories} |`);
 
         let visibility = "";
         if (this.props.confirmed.includes(restaurant)) {
@@ -70,7 +67,7 @@ class RestaurantContainer extends Component {
       <div className="row">
         <div>
           <div className="restaurant-show-row">
-            <div>{yelpList}</div>
+            <div className="">{yelpList}</div>
           </div>
         </div>
       </div>

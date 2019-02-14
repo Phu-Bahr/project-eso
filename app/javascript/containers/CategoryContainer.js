@@ -117,9 +117,6 @@ class CategoryContainer extends Component {
       .then(response => response.json())
       .then(body => {
         let yelpJSON = body.data;
-        if (yelpJSON === []) {
-          alert("Sorry no results for this search");
-        }
         this.setState({ yelpReturn: yelpJSON });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -201,53 +198,60 @@ class CategoryContainer extends Component {
 
     return (
       <div className="background">
-        <div className={visibilityL}>
-          <LikedContainer likeArray={this.state.likes} />
-        </div>
-        <div className={visibilityR}>
-          <RestaurantContainer
-            confirmed={confirmed}
-            yelpdata={this.state.yelpReturn}
-            addLiked={this.addLiked}
-            addDisliked={this.addDisliked}
-          />
-        </div>
-        <div className={visibility}>
-          <h2>Hello, Please Click your Categories</h2>
-          <div className="row">
-            <div className="small-4 columns">
-              <form className="other-category">
-                <PriceField
-                  label="Price"
-                  name="price"
-                  onChange={this.handlePriceChange}
-                  value={this.state.price}
-                  dollarvalue={this.state.dollarprice}
-                />
-              </form>
-            </div>
-            <div className="small-4 columns other-category">
-              <form>
-                <h4>Location</h4>
-                <div>
-                  <label htmlFor="location" />
-                  <input
-                    type="text"
-                    id="location"
-                    name="location"
-                    placeholder="City and State or Zip"
-                    value={this.state.location}
-                    onChange={event => this.textChange(event)}
-                  />
-                </div>
-              </form>
-            </div>
-            <div className="small-4 columns other-category">
-              <button onClick={this.handleYelpFetch}>Submit</button>
-            </div>
+        <div className="center">
+          <div className={visibilityL}>
+            <LikedContainer likeArray={this.state.likes} />
           </div>
-          <div className="row">
-            <div>{categoryList}</div>
+          <div className={visibilityR}>
+            <RestaurantContainer
+              confirmed={confirmed}
+              yelpdata={this.state.yelpReturn}
+              addLiked={this.addLiked}
+              addDisliked={this.addDisliked}
+            />
+          </div>
+          <div className={visibility}>
+            <h2 className="welcome">Welcome To Eso</h2>
+            <div className="row">
+              <div className="small-4 columns">
+                <form className="other-category">
+                  <br />
+                  <PriceField
+                    label="Price"
+                    name="price"
+                    onChange={this.handlePriceChange}
+                    value={this.state.price}
+                    dollarvalue={this.state.dollarprice}
+                  />
+                </form>
+              </div>
+              <div className="small-4 columns other-category">
+                <form>
+                  <h4>Location</h4>
+                  <div>
+                    <label htmlFor="location" />
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
+                      placeholder="City and State or Zip"
+                      value={this.state.location}
+                      onChange={event => this.textChange(event)}
+                    />
+                  </div>
+                </form>
+              </div>
+              <div className="small-4 columns other-category">
+                <br />
+                <br />
+                <button onClick={this.handleYelpFetch} className="myButton">
+                  Submit
+                </button>
+              </div>
+            </div>
+            <div>
+              <div>{categoryList}</div>
+            </div>
           </div>
         </div>
       </div>
