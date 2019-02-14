@@ -4,45 +4,56 @@ import { Link } from "react-router";
 const RestaurantTile = props => {
   return (
     <div className={props.show}>
-      <div className="layer">
-        <div className="rest-info">
-          <div className="row rest-info-tile">
-            <div className="small-6 columns">
-              <div className="rest-tile-info">
-                <img className="rest-img" src={props.imageUrl} />
-              </div>
+      <div className="background_fade">
+        <div>
+          <div className="row res-padding">
+            <div className="small-6 columns fill">
+              <img src={props.imageUrl} className="center-cropped" />
             </div>
             <div className="small-6 columns">
-              <div className="rest-tile-info">
+              <div>
                 <div className="center">
-                  <h1>
-                    <Link to={props.url} target="blank" className="text-center">
-                      {props.name}
-                    </Link>
-                  </h1>
                   <br />
-                  <h4 className="text-center">{props.location.address1}</h4>
-                  <h6 className="text-center">
-                    {props.location.city}, {props.location.state}{" "}
-                    {props.location.zip_code}
-                  </h6>
-                  <div className="categories text-center">
-                    <p>
+                  <div className="text-center">
+                    <h2>
+                      <Link to={props.url} target="blank">
+                        {props.name}
+                      </Link>
+                    </h2>
+                    <div>{props.location.address1}</div>
+                    <div>
+                      {props.location.city}, {props.location.state}{" "}
+                      {props.location.zip_code}
+                    </div>
+                    <div>
                       Rating: {props.rating} ☆ | Reviewed: {props.reviewCount} |
                       Price: {props.price}
-                    </p>
-                    <p>{props.categories}</p>
+                    </div>
+                    <div>{props.categories}</div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="medium-6 columns">
-              <button onClick={props.like}>LIKE</button>
-              <button onClick={props.dislike}>DISLIKE</button>
+              <br />
+              <div className="row">
+                <div className="small-6 small-centered text-center medium-centered large-centered column">
+                  <button className="like-dislike-button" onClick={props.like}>
+                    LIKE
+                  </button>
+                </div>
+                <div className="small-6 small-centered text-center medium-centered large-centered column">
+                  <button
+                    className="like-dislike-button"
+                    onClick={props.dislike}
+                  >
+                    DISLIKE
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <br />
     </div>
   );
 };

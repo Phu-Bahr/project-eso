@@ -3,7 +3,7 @@ import React from "react";
 const PriceField = props => {
   return (
     <div>
-      <label>
+      <label className="price-font">
         {props.label} = {props.value}$
         <br />
         <input
