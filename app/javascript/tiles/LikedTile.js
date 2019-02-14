@@ -3,53 +3,57 @@ import { Link } from "react-router";
 
 const LikedTile = props => {
   return (
-    <div className={props.hideAll}>
-      <div className={props.show}>
-        <div className="layer">
-          <div className="rest-info">
-            <div className="row rest-info-tile">
-              <div className="small-6 columns">
-                <div className="rest-tile-info">
-                  <img className="rest-img" src={props.imageUrl} />
-                </div>
-              </div>
-              <div className="small-6 columns">
-                <div className="rest-tile-info">
-                  <div className="center">
-                    <h1>
-                      <Link
-                        to={props.url}
-                        target="blank"
-                        className="text-center"
-                      >
+    <div className={props.show}>
+      <div className="background_fade glow-border">
+        <div>
+          <div className="row res-padding">
+            <div className="small-6 columns fill">
+              <img src={props.imageUrl} className="center-cropped" />
+            </div>
+            <div className="small-6 columns">
+              <div>
+                <div>
+                  <br />
+                  <div className="text-center">
+                    <h2>
+                      <Link to={props.url} target="blank">
                         {props.name}
                       </Link>
-                    </h1>
-                    <br />
-                    <h4 className="text-center">{props.location.address1}</h4>
-                    <h6 className="text-center">
+                    </h2>
+                    <div>{props.location.address1}</div>
+                    <div>
                       {props.location.city}, {props.location.state}{" "}
                       {props.location.zip_code}
-                    </h6>
-                    <div className="categories text-center">
-                      <p>
-                        Rating: {props.rating} ☆ | Price: {props.price}
-                      </p>
-                      <p>{props.categories}</p>
                     </div>
+                    <div>
+                      Rating: {props.rating} ☆ | Reviewed: {props.reviewCount} |
+                      Price: {props.price}
+                    </div>
+                    <div>{props.categories}</div>
                   </div>
                 </div>
               </div>
-              <div className="medium-6 columns">
-                <button onClick={props.like}>Going here?</button>
-                <br />
-                <br />
-                <button onClick={props.dislike}>Not good enough</button>
+              <br />
+              <div className="row">
+                <div className="small-6 columns text-right">
+                  <button className="like-dislike-button" onClick={props.like}>
+                    Definitely!
+                  </button>
+                </div>
+                <div className="small-6 columns">
+                  <button
+                    className="like-dislike-button"
+                    onClick={props.dislike}
+                  >
+                    No Thanks.
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <br />
     </div>
   );
 };

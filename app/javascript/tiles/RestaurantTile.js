@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const RestaurantTile = props => {
   return (
     <div className={props.show}>
-      <div className="background_fade">
+      <div className="background_fade glow-border">
         <div>
           <div className="row res-padding">
             <div className="small-6 columns fill">
@@ -12,9 +12,9 @@ const RestaurantTile = props => {
             </div>
             <div className="small-6 columns">
               <div>
-                <div className="center">
+                <div>
                   <br />
-                  <div className="text-center">
+                  <div className="text-center" style={{ marginTop: "20px" }}>
                     <h2>
                       <Link to={props.url} target="blank">
                         {props.name}
@@ -35,12 +35,12 @@ const RestaurantTile = props => {
               </div>
               <br />
               <div className="row">
-                <div className="small-6 small-centered text-center medium-centered large-centered column">
+                <div className="small-6 columns text-right">
                   <button className="like-dislike-button" onClick={props.like}>
                     LIKE
                   </button>
                 </div>
-                <div className="small-6 small-centered text-center medium-centered large-centered column">
+                <div className="small-6 columns">
                   <button
                     className="like-dislike-button"
                     onClick={props.dislike}
