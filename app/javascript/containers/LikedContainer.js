@@ -63,8 +63,8 @@ class LikedContainer extends Component {
           this.setIgnoreRestaurant(winner);
         };
 
-        let likedCat = [];
-        likedCat = winner.categories.map(categories => `*${categories.title}*`);
+        let yelpCat = [];
+        yelpCat = winner.categories.map(categories => `| ${categories} |`);
 
         let visibility;
         if (this.state.dislike.includes(winner)) {
@@ -82,7 +82,7 @@ class LikedContainer extends Component {
             show={visibility}
             hideAll={visibilityFinal}
             alias={winner.alias}
-            categories={likedCat}
+            categories={yelpCat}
             price={winner.price}
             location={winner.location}
             rating={winner.rating}
@@ -92,6 +92,7 @@ class LikedContainer extends Component {
             name={winner.name}
             like={handleLikeClick}
             dislike={handleDislikeClick}
+            reviewCount={winner.review_count}
           />
         );
       });

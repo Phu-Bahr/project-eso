@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, email: true
 
   def username
-    return self.email.split('@')[0]
+    return self.email.split('@')[0].capitalize
   end
 
   has_many :choices

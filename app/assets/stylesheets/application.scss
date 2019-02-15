@@ -16,6 +16,18 @@
 
  */
 
+.signin_style {
+  border-radius: 30px;
+  padding: 10px;
+  margin-top: 100px;
+}
+.featured {
+  font-family: "Permanent Marker", cursive;
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+}
+
 .table-background {
   background-color: white;
 }
@@ -74,6 +86,11 @@
 
 .background_fade {
   background: rgba(255, 255, 255, 0.8);
+}
+
+.background_fade_signin {
+  background: rgba(255, 255, 255, 0.8);
+  width: 400px;
 }
 
 .fade {
@@ -142,6 +159,14 @@
   display: flex;
   min-width: 100%;
   background: url("https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2018/02/07/104995688-Save_Tipping_V6_Alt_Music.00_00_16_06.Still001.jpg?v=1518046911");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.signin-background {
+  height: 100%;
+  min-width: 100%;
+  background: url("https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/1517000607/asia-the-warehouse-hotel-singapore-ITLIST0318.jpg?itok=RREkIjir");
   background-size: cover;
   background-attachment: fixed;
 }

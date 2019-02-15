@@ -10,50 +10,134 @@ class RestaurantIndexContainer extends Component {
     this.state = {
       user_rest: [],
       name: "",
-      formatedCategories: [],
+      formattedCategories: [],
       column: [
         {
           Header: "Name",
-          accessor: "name"
+          accessor: "name",
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
+        },
+        {
+          Header: "Price",
+          accessor: "price",
+          width: 60,
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
+        },
+        {
+          Header: "Rating",
+          accessor: "rating",
+          width: 60,
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         },
         {
           Header: "Street",
-          accessor: "street"
+          accessor: "street",
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         },
         {
           Header: "City",
-          accessor: "city"
+          accessor: "city",
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         },
         {
           Header: "State",
           accessor: "state",
-          width: 50,
-          style: { textAlign: "center" }
+          width: 80,
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         },
         {
           Header: "Zip",
           accessor: "zip",
           width: 100,
-          style: { textAlign: "center" }
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         },
         {
           Header: "Last Chosen",
-          accessor: "updated_at"
+          accessor: "updated_at",
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         },
         {
           Header: "Category",
           accessor: "yelpcategory",
-          minWidth: 100
+          minWidth: 100,
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         }
       ],
       column2: [
         {
           Header: "Category",
-          accessor: "category"
+          accessor: "category",
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         },
         {
           Header: "Instances",
-          accessor: "instances"
+          accessor: "instances",
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
+        },
+        {
+          Header: "Average %",
+          accessor: "average",
+          headerStyle: {
+            textAlign: "left",
+            fontWeight: "bold",
+            backgroundColor: "#6F242F",
+            color: "white"
+          }
         }
       ]
     };
@@ -89,18 +173,24 @@ class RestaurantIndexContainer extends Component {
 
         let categoriesArray = Object.keys(result);
         let categoryInstances = Object.values(result);
+        let categoryAverages = [];
+        for (var i = 0; i < categoryInstances.length; ++i) {
+          let average = Math.floor(
+            (categoryInstances[i] / restaurants.length) * 100
+          );
+          categoryAverages.push(average);
+        }
 
         let formattedCats = [];
         for (var i = 0; i < categoriesArray.length; ++i) {
           let restaurantsHash = {};
           restaurantsHash["category"] = categoriesArray[i];
           restaurantsHash["instances"] = categoryInstances[i];
+          restaurantsHash["average"] = categoryAverages[i];
           formattedCats.push(restaurantsHash);
         }
 
-        console.log(formattedCats);
-
-        this.setState({ formatedCategories: formattedCats });
+        this.setState({ formattedCategories: formattedCats });
         this.setState({
           user_rest: body.restaurants[0].UserRestaurants,
           name: body.restaurants[0].UserName
@@ -109,26 +199,27 @@ class RestaurantIndexContainer extends Component {
   }
 
   render() {
-    let userName = this.state.name.substr(0, this.state.name.indexOf("@"));
+    let userNameIndex = this.state.name.substr(0, this.state.name.indexOf("@"));
+    let userName =
+      userNameIndex.charAt(0).toUpperCase() + userNameIndex.slice(1);
     console.log(this.state);
-
     return (
       <div className="restaurant-index-background">
         <div className="row">
-          <h1 className="welcome">Your Restaurants</h1>
+          <h1 className="welcome">{userName}'s Restaurants</h1>
           <div className="table-background">
             <ReactTable
               data={this.state.user_rest}
               columns={this.state.column}
-              defaultPageSize={10}
+              defaultPageSize={5}
               pageSizeOptions={[3, 5, 10]}
             />
           </div>
           <div className="table-background">
             <ReactTable
-              data={this.state.formatedCategories}
+              data={this.state.formattedCategories}
               columns={this.state.column2}
-              defaultPageSize={10}
+              defaultPageSize={5}
               pageSizeOptions={[3, 5, 10]}
             />
           </div>
