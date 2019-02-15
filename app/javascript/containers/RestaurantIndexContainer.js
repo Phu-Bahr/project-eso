@@ -27,11 +27,14 @@ class RestaurantIndexContainer extends Component {
         {
           Header: "State",
           accessor: "state",
-          width: ""
+          width: 50,
+          style: { textAlign: "center" }
         },
         {
           Header: "Zip",
-          accessor: "zip"
+          accessor: "zip",
+          width: 100,
+          style: { textAlign: "center" }
         },
         {
           Header: "Last Chosen",
@@ -39,7 +42,8 @@ class RestaurantIndexContainer extends Component {
         },
         {
           Header: "Category",
-          accessor: "yelpcategory"
+          accessor: "yelpcategory",
+          minWidth: 100
         }
       ],
       column2: [
@@ -120,6 +124,14 @@ class RestaurantIndexContainer extends Component {
               pageSizeOptions={[3, 5, 10]}
             />
           </div>
+          <div className="table-background">
+            <ReactTable
+              data={this.state.formatedCategories}
+              columns={this.state.column2}
+              defaultPageSize={10}
+              pageSizeOptions={[3, 5, 10]}
+            />
+          </div>
         </div>
       </div>
     );
@@ -127,12 +139,3 @@ class RestaurantIndexContainer extends Component {
 }
 
 export default RestaurantIndexContainer;
-
-// <div className="table-background">
-//   <ReactTable
-//     data={this.state.formatedCategories}
-//     columns={this.state.column2}
-//     defaultPageSize={10}
-//     pageSizeOptions={[3, 5, 10]}
-//   />
-// </div>
