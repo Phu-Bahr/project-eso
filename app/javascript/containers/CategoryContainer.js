@@ -42,7 +42,7 @@ class CategoryContainer extends Component {
   finalround(event) {
     if (this.state.likes.length > 0) {
       // this.setState({ popupFinal: true });
-      alert("Final Round");
+      alert("Final Round, one like only. Make it good!");
     }
   }
   setSelectedChoice(userChoice) {
