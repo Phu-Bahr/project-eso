@@ -16,6 +16,9 @@
 
  */
 
+.-btn {
+  margin-bottom: 0px;
+}
 input::placeholder {
   color: blue;
   text-align: center;
@@ -318,7 +321,7 @@ input::placeholder {
   border-radius: 5px;
   width: 30%;
   position: relative;
-  transition: all 1s ease-in-out;
+  transition: all 0.3s ease-in-out;
   z-index: 3;
   margin-top: 12%;
 }

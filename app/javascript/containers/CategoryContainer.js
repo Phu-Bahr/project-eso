@@ -41,7 +41,6 @@ class CategoryContainer extends Component {
 
   finalround(event) {
     if (this.state.likes.length > 0) {
-      // this.setState({ popupFinal: true });
       alert("Final Round, one like only. Make it good!");
     }
   }
@@ -190,25 +189,12 @@ class CategoryContainer extends Component {
 
     let popup;
     let overlay;
-    let content;
     if (this.state.popup === true) {
       popup = "popup";
       overlay = "overlay";
-      content = "content";
     } else {
       popup = "invisible";
       overlay = "invisible";
-      content = "invisible";
-    }
-
-    let popup1;
-    let overlay1;
-    if (this.state.popupFinal === true) {
-      popup1 = "popup";
-      overlay1 = "overlay";
-    } else {
-      popup1 = "invisible";
-      overlay1 = "invisible";
     }
 
     let categoryArr = this.state.categories;
@@ -243,25 +229,7 @@ class CategoryContainer extends Component {
         <div className="center">
           <div className={overlay}>
             <div className={popup}>
-              <div className={content}>
-                <h2 className="centerErrorMessage">No Results!</h2>
-                Hi, Eso is at it's infancy at the moment. You're seeing this
-                message because we found no places that match the price or
-                restaurant within 3 miles of your search.
-                <div className="centerErrorMessage">
-                  <button
-                    onClick={this.closePopup}
-                    className="like-dislike-button"
-                  >
-                    Try again!
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={overlay1}>
-            <div className={popup1}>
-              <div className={content}>
+              <div>
                 <h2 className="centerErrorMessage">No Results!</h2>
                 Hi, Eso is at it's infancy at the moment. You're seeing this
                 message because we found no places that match the price or
