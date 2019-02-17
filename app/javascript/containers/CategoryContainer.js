@@ -167,6 +167,7 @@ class CategoryContainer extends Component {
   }
 
   render() {
+    console.log(this.state);
     let visibility;
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {
