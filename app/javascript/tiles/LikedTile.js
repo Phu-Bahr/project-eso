@@ -36,16 +36,19 @@ const LikedTile = props => {
               <br />
               <div className="row">
                 <div className="small-6 columns text-right">
-                  <button className="like-dislike-button" onClick={props.like}>
-                    Definitely!
+                  <button
+                    className="like-dislike-button-like-page"
+                    onClick={props.like}
+                  >
+                    Final Decision!
                   </button>
                 </div>
                 <div className="small-6 columns">
                   <button
-                    className="like-dislike-button"
+                    className="like-dislike-button-like-page"
                     onClick={props.dislike}
                   >
-                    No Thanks.
+                    No Thanks. Next?
                   </button>
                 </div>
               </div>

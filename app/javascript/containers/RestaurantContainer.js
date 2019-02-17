@@ -70,6 +70,9 @@ class RestaurantContainer extends Component {
             <div className="">{yelpList}</div>
           </div>
         </div>
+        <div className="centerErrorMessage show-tile">
+          <h3>Click "New Search" on the top bar if you want to again.</h3>
+        </div>
       </div>
     );
   }
