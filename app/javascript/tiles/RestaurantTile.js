@@ -34,6 +34,7 @@ const RestaurantTile = props => {
                 </div>
               </div>
               <br />
+              <br />
               <div className="row">
                 <div className="small-6 columns text-right">
                   <button className="like-dislike-button" onClick={props.like}>

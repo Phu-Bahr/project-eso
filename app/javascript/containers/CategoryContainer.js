@@ -16,7 +16,9 @@ class CategoryContainer extends Component {
       location: "",
       price: 1,
       likes: [],
-      dislikes: []
+      dislikes: [],
+      popup: false,
+      popupFinal: false
     };
     this.setSelectedStep = this.setSelectedStep.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
@@ -26,6 +28,7 @@ class CategoryContainer extends Component {
     this.yelpCall = this.yelpCall.bind(this);
     this.addLiked = this.addLiked.bind(this);
     this.addDisliked = this.addDisliked.bind(this);
+    this.closePopup = this.closePopup.bind(this);
   }
 
   setSelectedStep(stepId) {
@@ -36,6 +39,12 @@ class CategoryContainer extends Component {
     }
   }
 
+  finalround(event) {
+    if (this.state.likes.length > 0) {
+      // this.setState({ popupFinal: true });
+      alert("Final Round");
+    }
+  }
   setSelectedChoice(userChoice) {
     if (userChoice === this.state.category) {
       this.setState({ category: "" });
@@ -111,11 +120,16 @@ class CategoryContainer extends Component {
         } else {
           let errorMessage = `${response.status} (${response.statusText})`,
             error = new Error(errorMessage);
+          alert(`${error}. Check your location.`);
           throw error;
         }
       })
       .then(response => response.json())
       .then(body => {
+        if (body.data.length === 0) {
+          this.setState({ popup: true });
+        }
+
         let yelpJSON = body.data;
         this.setState({ yelpReturn: yelpJSON });
       })
@@ -148,8 +162,11 @@ class CategoryContainer extends Component {
     }
   }
 
+  closePopup(event) {
+    this.setState({ popup: false });
+  }
+
   render() {
-    console.log(this.state);
     let visibility;
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {
@@ -165,8 +182,32 @@ class CategoryContainer extends Component {
       this.state.yelpReturn.length
     ) {
       visibilityL = "";
+      this.finalround(event);
     } else {
       visibilityL = "invisible";
+    }
+
+    let popup;
+    let overlay;
+    let content;
+    if (this.state.popup === true) {
+      popup = "popup";
+      overlay = "overlay";
+      content = "content";
+    } else {
+      popup = "invisible";
+      overlay = "invisible";
+      content = "invisible";
+    }
+
+    let popup1;
+    let overlay1;
+    if (this.state.popupFinal === true) {
+      popup1 = "popup";
+      overlay1 = "overlay";
+    } else {
+      popup1 = "invisible";
+      overlay1 = "invisible";
     }
 
     let categoryArr = this.state.categories;
@@ -199,6 +240,42 @@ class CategoryContainer extends Component {
     return (
       <div className="background">
         <div className="center">
+          <div className={overlay}>
+            <div className={popup}>
+              <div className={content}>
+                <h2 className="centerErrorMessage">No Results!</h2>
+                Hi, Eso is at it's infancy at the moment. You're seeing this
+                message because we found no places that match the price or
+                restaurant within 3 miles of your search.
+                <div className="centerErrorMessage">
+                  <button
+                    onClick={this.closePopup}
+                    className="like-dislike-button"
+                  >
+                    Try again!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={overlay1}>
+            <div className={popup1}>
+              <div className={content}>
+                <h2 className="centerErrorMessage">No Results!</h2>
+                Hi, Eso is at it's infancy at the moment. You're seeing this
+                message because we found no places that match the price or
+                restaurant within 3 miles of your search.
+                <div className="centerErrorMessage">
+                  <button
+                    onClick={this.closePopup}
+                    className="like-dislike-button"
+                  >
+                    Try again!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className={visibilityL}>
             <LikedContainer likeArray={this.state.likes} />
           </div>
@@ -212,6 +289,7 @@ class CategoryContainer extends Component {
           </div>
           <div className={visibility}>
             <h2 className="welcome">Welcome To Eso</h2>
+            <br />
             <div className="row">
               <div className="small-4 columns">
                 <form className="other-category">
@@ -241,14 +319,17 @@ class CategoryContainer extends Component {
                   </div>
                 </form>
               </div>
-              <div className="small-4 columns other-category">
+              <div>
                 <br />
-                <br />
-                <button onClick={this.handleYelpFetch} className="myButton">
+                <button
+                  onClick={this.handleYelpFetch}
+                  className="small-4 columns like-dislike-button-home"
+                >
                   Submit
                 </button>
               </div>
             </div>
+            <br />
             <div>
               <div>{categoryList}</div>
             </div>

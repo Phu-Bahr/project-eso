@@ -202,7 +202,6 @@ class RestaurantIndexContainer extends Component {
     let userNameIndex = this.state.name.substr(0, this.state.name.indexOf("@"));
     let userName =
       userNameIndex.charAt(0).toUpperCase() + userNameIndex.slice(1);
-    console.log(this.state);
     return (
       <div className="restaurant-index-background">
         <div className="row">
