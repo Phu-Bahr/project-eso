@@ -210,7 +210,7 @@ class RestaurantIndexContainer extends Component {
             <ReactTable
               data={this.state.user_rest}
               columns={this.state.column}
-              defaultPageSize={5}
+              defaultPageSize={10}
               pageSizeOptions={[3, 5, 10]}
             />
           </div>
