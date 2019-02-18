@@ -231,9 +231,9 @@ class CategoryContainer extends Component {
             <div className={popup}>
               <div>
                 <h2 className="centerErrorMessage">No Results!</h2>
-                Hi, Eso is at it's infancy at the moment. You're seeing this
-                message because we found no places that match the price or
-                restaurant within 3 miles of your search.
+                Hi, Eso searches for exact criteria. Try to be as specific as
+                you can so we can help recommend places! Adjust your price or
+                have more info in location.
                 <div className="centerErrorMessage">
                   <button
                     onClick={this.closePopup}
