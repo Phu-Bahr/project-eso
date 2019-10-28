@@ -221,9 +221,7 @@ input::placeholder {
 }
 
 .invisible {
-  display: hidden;
-  width: 0.00001px;
-  height: 0.00001px;
+  display: none;
 }
 
 .inner {
