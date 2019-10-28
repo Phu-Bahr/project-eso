@@ -71,7 +71,7 @@ class RestaurantContainer extends Component {
           </div>
         </div>
         <div className="centerErrorMessage show-tile">
-          <h3>Click "New Search" on the top bar if you want to again.</h3>
+          <h3>Click "New Search" on the top bar if you want to search again.</h3>
         </div>
       </div>
     );
