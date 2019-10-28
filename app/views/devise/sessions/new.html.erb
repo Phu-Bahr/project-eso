@@ -5,11 +5,22 @@
     <div>
       <div align="center">
         <div class="small-4 background_fade_signin signin_style glow-border">
+          <div class="">
+            Welcome to Eso! This work in progress app is my capstone project for Launch Academy. It's meant to be sort of like a Tinder-esque experience where it helps you narrow down your foodie choices.
+            Sign in, enter your 3 search criterias, click submit, and like or dislike until the very end. You can click on the photos, reviews, and restaurant name and it'll take you to the appropriate Yelp site. Enjoy and have fun with it!
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div align="center">
+        <div class="small-4 background_fade_signin signin_style glow-border">
           <div class="featured">
             Sign In
           </div>
           <div class="">
-            (Sign up with fake email and password to test app)
+            (Sign up with fake email and password <%= link_to 'here', new_user_registration_path %>
+            to test app)
           </div>
           <br/>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
