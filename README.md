@@ -1,5 +1,7 @@
 Project ESO
 
+https://project-eso.herokuapp.com/
+
 "Where do you want to eat?"
 
 Eso is a restaurant search and recommendation web application. It utilizes Ruby on Rails on the back and and React.js in the front end. This app is being deployed on Heroku utilizing PostgresSQL.  This app is meant to help a user streamline and filter choices on where to eat. Other webtools just list out your broad search criteria, but Eso narrows it down to a 3mile radius and very specific search criteria to guides you through each restaurant through the process of elimination until you've found just 1 restaurant.
@@ -14,7 +16,7 @@ After cloning and getting into directory, you'll need to run the following into 
 3. bundle exec rake db:create
 4. bundle exec rake db:migrate
 5. bundle exec rake db:seed
-6. make sure ruby version is changed to 2.4.5 via Chruby command.
+6. make sure ruby version is changed to 2.6.5 via Chruby command or RMV.
 7. then in command line run your servers - "Rails s" and in another tab "yarn start" for React's webpacker.
 
 This app is very simple for now with 3 tables, 2 main paths /categories and /restaurants. 3 paths if you include devise user log in screens.
