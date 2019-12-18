@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router";
 
 const RestaurantTile = props => {
+  console.log("tile",props.url);
+  
   let photosLink = `https://www.yelp.com/biz_photos/${props.alias}`;
   let reviewLink = `https://www.yelp.com/biz/${props.alias}?sort_by=date_desc`;
 
