@@ -1,149 +1,88 @@
-import React, { Component } from "react";
-import RestaurantIndexTile from "../tiles/RestaurantIndexTile";
-import ReactTable from "react-table";
-import "react-table/react-table.css";
-import { Link } from "react-router";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useTable } from "react-table";
+import makeData from "./makeData";
+import MakeData1 from "./makeData1";
 
-class RestaurantIndexContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user_rest: [],
-      name: "",
-      formattedCategories: [],
-      column: [
-        {
-          Header: "Name",
-          accessor: "name",
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "Price",
-          accessor: "price",
-          width: 60,
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "Rating",
-          accessor: "rating",
-          width: 60,
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "Street",
-          accessor: "street",
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "City",
-          accessor: "city",
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "State",
-          accessor: "state",
-          width: 80,
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "Zip",
-          accessor: "zip",
-          width: 100,
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "Last Chosen",
-          accessor: "updated_at",
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "Category",
-          accessor: "yelpcategory",
-          minWidth: 100,
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
+const Styles = styled.div`
+  padding: 1rem;
+
+  table {
+    border-spacing: 0;
+    border: 1px solid black;
+
+    tr {
+      :last-child {
+        td {
+          border-bottom: 0;
         }
-      ],
-      column2: [
-        {
-          Header: "Category",
-          accessor: "category",
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "Instances",
-          accessor: "instances",
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        },
-        {
-          Header: "Average %",
-          accessor: "average",
-          headerStyle: {
-            textAlign: "left",
-            fontWeight: "bold",
-            backgroundColor: "#6F242F",
-            color: "white"
-          }
-        }
-      ]
-    };
+      }
+    }
+
+    th,
+    td {
+      margin: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+
+      :last-child {
+        border-right: 0;
+      }
+    }
   }
+`;
 
-  componentDidMount() {
+function Table({ columns, data }) {
+  // Use the state and functions returned from useTable to build your UI
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow
+  } = useTable({
+    columns,
+    data
+  });
+
+  // Render the UI for your table
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row, i) => {
+          prepareRow(row);
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map(cell => {
+                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
+// how to fetch my data with hooks.
+const RestaurantIndexContainer = () => {
+  const [data1, setData] = useState({});
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
     fetch("/api/v1/restaurants")
       .then(response => {
         if (response.ok) {
@@ -156,76 +95,67 @@ class RestaurantIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        let categoriesArr = [];
-        let restaurants = body.restaurants[0].UserRestaurants;
-        let restaurantsArr = restaurants.map(restaurant =>
-          restaurant.yelpcategory.map(yelpCat => {
-            categoriesArr.push(yelpCat);
-          })
-        );
-
-        let a = categoriesArr;
-        let result = {};
-        for (var i = 0; i < a.length; ++i) {
-          if (!result[a[i]]) result[a[i]] = 0;
-          ++result[a[i]];
-        }
-
-        let categoriesArray = Object.keys(result);
-        let categoryInstances = Object.values(result);
-        let categoryAverages = [];
-        for (var i = 0; i < categoryInstances.length; ++i) {
-          let average = Math.floor(
-            (categoryInstances[i] / restaurants.length) * 100
-          );
-          categoryAverages.push(average);
-        }
-
-        let formattedCats = [];
-        for (var i = 0; i < categoriesArray.length; ++i) {
-          let restaurantsHash = {};
-          restaurantsHash["category"] = categoriesArray[i];
-          restaurantsHash["instances"] = categoryInstances[i];
-          restaurantsHash["average"] = categoryAverages[i];
-          formattedCats.push(restaurantsHash);
-        }
-
-        this.setState({ formattedCategories: formattedCats });
-        this.setState({
-          user_rest: body.restaurants[0].UserRestaurants,
-          name: body.restaurants[0].UserName
-        });
+        setData(body.restaurants[0].UserRestaurants);
       });
-  }
+  };
 
-  render() {
-    let userNameIndex = this.state.name.substr(0, this.state.name.indexOf("@"));
-    let userName =
-      userNameIndex.charAt(0).toUpperCase() + userNameIndex.slice(1);
-    return (
-      <div className="restaurant-index-background">
-        <div className="row">
-          <h1 className="welcome">{userName}'s Restaurants</h1>
-          <div className="table-background">
-            <ReactTable
-              data={this.state.user_rest}
-              columns={this.state.column}
-              defaultPageSize={10}
-              pageSizeOptions={[3, 5, 10]}
-            />
-          </div>
-          <div className="table-background">
-            <ReactTable
-              data={this.state.formattedCategories}
-              columns={this.state.column2}
-              defaultPageSize={5}
-              pageSizeOptions={[3, 5, 10]}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Username Restaurants",
+        columns: [
+          {
+            Header: "Name",
+            accessor: "name"
+          },
+          {
+            Header: "Price",
+            accessor: "price"
+          },
+          {
+            Header: "Rating",
+            accessor: "rating"
+          },
+          {
+            Header: "Street",
+            accessor: "street"
+          },
+          {
+            Header: "City",
+            accessor: "city"
+          },
+          {
+            Header: "State",
+            accessor: "state"
+          },
+          {
+            Header: "Zip",
+            accessor: "zip"
+          },
+          {
+            Header: "Last Chosen",
+            accessor: "updated_at"
+          },
+          {
+            Header: "Category",
+            accessor: "yelpcategory"
+          }
+        ]
+      }
+    ],
+    []
+  );
+
+  const data = React.useMemo(() => [data1], []);
+  console.log(data1);
+
+  return (
+    <div>
+      <Styles>
+        <Table columns={columns} data={data} />
+      </Styles>
+    </div>
+  );
+};
 
 export default RestaurantIndexContainer;
