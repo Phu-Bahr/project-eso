@@ -4,6 +4,8 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "~6.24.1",
+    "js-yaml": "3.13.1",
+    "mem": "4.0.0",
     "namor": "^2.0.2",
     "prop-types": "~15.6.0",
     "react": "^16.8.3",
@@ -11,6 +13,8 @@
     "react-router": "~3.2.0",
     "react-table": "^7.0.0-rc.10",
     "redbox-react": "1.6.0",
+    "serialize-javascript": "2.1.1",
+    "set-value": "2.0.1",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
