@@ -76,7 +76,7 @@ function Table({ columns, data }) {
 
 // how to fetch my data with hooks.
 const RestaurantIndexContainer = () => {
-  const [data1, setData] = useState({});
+  const [data1, setData] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -146,8 +146,8 @@ const RestaurantIndexContainer = () => {
     []
   );
 
-  const data = React.useMemo(() => [data1], []);
-  console.log(data1);
+  const data = data1;
+  console.log(data1[0]);
 
   return (
     <div>
