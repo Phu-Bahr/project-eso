@@ -174,7 +174,6 @@ const RestaurantIndexContainer = () => {
   );
 
   const data = data1;
-  console.log(data1[0]);
 
   return (
     <div>
