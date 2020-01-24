@@ -42,7 +42,7 @@ class CategoryContainer extends Component {
   finalround(event) {
     if (this.state.likes.length > 0) {
       alert("Final Round, one like only. Make it good!");
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     }
   }
   setSelectedChoice(userChoice) {
@@ -138,9 +138,7 @@ class CategoryContainer extends Component {
 
   handleYelpFetch(event) {
     event.preventDefault();
-    let url = `/api/v1/restaurants/search?location=${
-      this.state.location
-    }&categories=${this.state.category}&price=${this.state.price}`;
+    let url = `/api/v1/restaurants/search?location=${this.state.location}&categories=${this.state.category}&price=${this.state.price}`;
     this.yelpCall(url);
   }
 
@@ -167,7 +165,6 @@ class CategoryContainer extends Component {
   }
 
   render() {
-    console.log(this.state);
     let visibility;
     let visibilityR;
     if (this.state.yelpReturn.length > 0) {

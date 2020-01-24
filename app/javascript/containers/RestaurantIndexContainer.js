@@ -86,13 +86,13 @@ function Table({ columns, data }) {
               </tr>
             );
           })}
+          <p className="panel">
+            Showing the first 20 results of {rows.length} rows. Click on column
+            names to sort.
+          </p>
         </tbody>
       </table>
       <br />
-      <div>
-        Showing the first 20 results of {rows.length} rows. Click on column
-        names to sort.
-      </div>
     </div>
   );
 }
